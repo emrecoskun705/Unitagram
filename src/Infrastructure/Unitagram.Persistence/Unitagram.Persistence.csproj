@@ -6,4 +6,9 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\Core\Unitagram.Application\Unitagram.Application.csproj" />
+      <ProjectReference Include="..\..\Core\Unitagram.Domain\Unitagram.Domain.csproj" />
+    </ItemGroup>
+
 </Project>
