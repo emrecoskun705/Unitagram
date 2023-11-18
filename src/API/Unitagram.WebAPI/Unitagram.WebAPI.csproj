@@ -6,4 +6,23 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Asp.Versioning.Mvc" Version="7.1.0" />
+      <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="7.1.0" />
+      <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.0" />
+      <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Core\Unitagram.Application\Unitagram.Application.csproj" />
+      <ProjectReference Include="..\..\Core\Unitagram.Domain\Unitagram.Domain.csproj" />
+      <ProjectReference Include="..\..\Infrastructure\Unitagram.Infrastructure\Unitagram.Infrastructure.csproj" />
+      <ProjectReference Include="..\..\Infrastructure\Unitagram.Persistence\Unitagram.Persistence.csproj" />
+    </ItemGroup>
+
 </Project>
