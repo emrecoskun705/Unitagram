@@ -66,8 +66,8 @@ public static class DependencyInjection
 
         services.AddAuthorization();
         
-        // services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
-        // services.AddScoped<ApplicationDbContextInitialiser>();
+        services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
+        services.AddScoped<ApplicationDbContextInitialiser>();
 
         return services;
     }
