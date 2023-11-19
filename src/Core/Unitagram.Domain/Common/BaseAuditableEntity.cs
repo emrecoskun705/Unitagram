@@ -1,6 +1,6 @@
 ﻿namespace Unitagram.Domain.Common;
 
-public abstract class BaseAuditableEntity : BaseEntity
+public abstract class BaseAuditableEntity<TEntityId> : BaseEntity<TEntityId>
 {
     public DateTimeOffset Created { get; set; }
 

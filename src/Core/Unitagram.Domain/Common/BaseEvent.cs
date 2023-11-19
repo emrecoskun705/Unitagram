@@ -2,7 +2,7 @@
 
 namespace Unitagram.Domain.Common;
 
-public abstract class BaseEvent : IDomainEvent
+public abstract class BaseEvent : INotification
 {
     protected BaseEvent(Guid id, DateTime occurredOnUtc)
         : this()

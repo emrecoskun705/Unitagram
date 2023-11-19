@@ -2,13 +2,17 @@
 
 namespace Unitagram.Domain.Common;
 
-public abstract class BaseEntity
+public abstract class BaseEntity<TEntityId>
 {
-    // This can easily be modified to be BaseEntity<T> and public T Id to support different key types.
-    // Using non-generic integer types for simplicity
-    public int Id { get; set; }
+    public TEntityId Id { get; init; }
 
     private readonly List<BaseEvent> _domainEvents = new();
+    
+    protected BaseEntity(TEntityId id) => Id = id;
+
+    protected BaseEntity() {
+
+    }
 
     [NotMapped]
     public IReadOnlyCollection<BaseEvent> DomainEvents => _domainEvents.AsReadOnly();
