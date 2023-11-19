@@ -1,1 +1,14 @@
-﻿
+version: '3.4'
+
+services:
+  unitagram.webapi:
+    image: ${DOCKER_REGISTRY-}unitagramwebapi
+    build:
+      context: .
+      dockerfile: src/API/Unitagram.WebAPI/Dockerfile
+      
+  unitagram.db:
+      image: postgres
+    
+volumes: 
+  unitagram_data:

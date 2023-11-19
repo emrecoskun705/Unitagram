@@ -8,6 +8,10 @@ namespace Unitagram.Persistence.Data;
 
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser,ApplicationRole, Guid>, IApplicationDbContext
 {
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+    {
+    }
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

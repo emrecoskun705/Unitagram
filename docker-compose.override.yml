@@ -1,0 +1,30 @@
+version: '3.4'
+
+services:
+  unitagram.webapi:
+    container_name: unitagram.webapi
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:Default=Server=unitagram.db;Database=UnitagramDb;User Id=admin;Password=admin1234"
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+    ports:
+      - "8080:80"
+      - "8081:443"
+    depends_on: 
+      - unitagram.db
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+  
+  unitagram.db:
+    container_name: unitagram.db
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin1234
+      - POSTGRES_DB=UnitagramDb
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - unitagram_data:/var/lib/postgresql/data/

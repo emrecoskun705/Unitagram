@@ -1,4 +1,3 @@
-using System.Reflection;
 using FluentAssertions;
 using NetArchTest.Rules;
 
@@ -108,21 +107,21 @@ public class ArchitectureTests
     public void WebAPI_Should_Not_HaveDependencyOnOtherProjects()
     {
         // Arrange
-        // var assembly = typeof(WebAPI.AssemblyReference).Assembly;
-        //
-        // var otherProjects = new[]
-        // {
-        //     InfrastructureNamespace,
-        // };
-        //
-        // // Act
-        // var testResult = Types
-        //     .InAssembly(assembly)
-        //     .ShouldNot()
-        //     .HaveDependencyOnAny(otherProjects)
-        //     .GetResult();
-        //
-        // // Assert
-        // testResult.IsSuccessful.Should().BeTrue();
+        var assembly = typeof(WebAPI.AssemblyReference).Assembly;
+        
+        var otherProjects = new[]
+        {
+            InfrastructureNamespace,
+        };
+        
+        // Act
+        var testResult = Types
+            .InAssembly(assembly)
+            .ShouldNot()
+            .HaveDependencyOnAny(otherProjects)
+            .GetResult();
+        
+        // Assert
+        testResult.IsSuccessful.Should().BeTrue();
     }
 }
