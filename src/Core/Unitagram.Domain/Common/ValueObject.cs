@@ -1,50 +1,65 @@
 ﻿namespace Unitagram.Domain.Common;
 
-// Learn more: https://docs.microsoft.com/en-us/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/implement-value-objects
-public abstract class ValueObject
+public abstract class ValueObject : IEquatable<ValueObject>
 {
-    protected static bool EqualOperator(ValueObject left, ValueObject right)
+    public static bool operator ==(ValueObject? first, ValueObject? second)
     {
-        if (left is null ^ right is null)
+        if (first is null && second is null)
+        {
+            return true;
+        }
+
+        if (first is null || second is null)
         {
             return false;
         }
 
-        return left?.Equals(right!) != false;
+        return first.Equals(second);
     }
 
-    protected static bool NotEqualOperator(ValueObject left, ValueObject right)
-    {
-        return !(EqualOperator(left, right));
-    }
+    public static bool operator !=(ValueObject? first, ValueObject? second) => !(first == second);
 
-    protected abstract IEnumerable<object> GetEqualityComponents();
+    /// <inheritdoc />
+    public bool Equals(ValueObject? other) => other is not null && ValuesEqual(other);
 
+    /// <inheritdoc />
     public override bool Equals(object? obj)
     {
-        if (obj == null || obj.GetType() != GetType())
+        if (obj is null)
         {
             return false;
         }
 
-        var other = (ValueObject)obj;
-        return GetEqualityComponents().SequenceEqual(other.GetEqualityComponents());
+        if (GetType() != obj.GetType())
+        {
+            return false;
+        }
+
+        if (obj is not ValueObject otherValueObject)
+        {
+            return false;
+        }
+
+        return ValuesEqual(otherValueObject);
     }
 
-    public override int GetHashCode()
-    {
-        return GetEqualityComponents()
-            .Select(x => x != null ? x.GetHashCode() : 0)
-            .Aggregate((x, y) => x ^ y);
-    }
-    
-    public static bool operator ==(ValueObject one, ValueObject two)
-    {
-        return EqualOperator(one, two);
-    }
+    /// <inheritdoc />
+    public override int GetHashCode() =>
+        GetAtomicValues()
+            .Aggregate(
+                default(int),
+                (hashcode, value) => HashCode.Combine(hashcode, value.GetHashCode()));
 
-    public static bool operator !=(ValueObject one, ValueObject two)
-    {
-        return NotEqualOperator(one, two);
-    }
+    /// <summary>
+    /// Gets the atomic values of the value object.
+    /// </summary>
+    /// <returns>The collection of objects representing the value object values.</returns>
+    protected abstract IEnumerable<object> GetAtomicValues();
+
+    /// <summary>
+    /// Checks if the values of the specified value object are equal to the values of the current instance.
+    /// </summary>
+    /// <param name="other">The other value object.</param>
+    /// <returns>True if the values of the specified value object are equal to the values of the current instance, otherwise false.</returns>
+    private bool ValuesEqual(ValueObject other) => GetAtomicValues().SequenceEqual(other.GetAtomicValues());
 }
