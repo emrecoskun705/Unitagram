@@ -15,7 +15,7 @@ builder.Host.UseSerilog((context,  services,  loggerConfiguration) =>
         .ReadFrom.Services(services);// reads out current app's services and make them available to serilog
 });
 
-builder.Services.AddInfrastructureServices();
+builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddApplicationServices();
 builder.Services.AddPersistenceServices(builder.Configuration);
 

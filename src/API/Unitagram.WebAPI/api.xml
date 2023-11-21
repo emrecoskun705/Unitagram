@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Unitagram.WebAPI</name>
+    </assembly>
+    <members>
+        <member name="T:Unitagram.WebAPI.Controllers.UnauthorizedControllerBase">
+            <summary>
+            Unauthorized controller base
+            </summary>
+        </member>
+        <member name="T:Program">
+            <summary>
+            make the auto-generated Program accessible programmatically
+            </summary>
+        </member>
+    </members>
+</doc>

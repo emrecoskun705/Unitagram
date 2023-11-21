@@ -10,6 +10,10 @@
         <DockerComposeProjectPath>..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <DocumentationFile>./api.xml</DocumentationFile>
+    </PropertyGroup>
+
     <ItemGroup>
       <PackageReference Include="Asp.Versioning.Mvc" Version="7.1.0" />
       <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="7.1.0" />
@@ -38,6 +42,11 @@
       <ProjectReference Include="..\..\Core\Unitagram.Domain\Unitagram.Domain.csproj" />
       <ProjectReference Include="..\..\Infrastructure\Unitagram.Infrastructure\Unitagram.Infrastructure.csproj" />
       <ProjectReference Include="..\..\Infrastructure\Unitagram.Persistence\Unitagram.Persistence.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Controllers\v2\" />
+      <Folder Include="Filters\" />
     </ItemGroup>
 
 </Project>
