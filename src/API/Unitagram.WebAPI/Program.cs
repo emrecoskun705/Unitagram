@@ -37,9 +37,13 @@ if (builder.Environment.IsProduction())
     app.UseHttpsRedirection();
 }
 
-if (builder.Environment.IsDevelopment() || builder.Environment.IsProduction()) // TODO: remove production check later
+if (builder.Environment.IsDevelopment())
 {
-    // app.UseDeveloperExceptionPage();
+    app.UseDeveloperExceptionPage();
+}
+
+if (builder.Environment.IsDevelopment() || builder.Environment.IsProduction())
+{
     app.UseSwagger(); // creates endpoints for swagger.json
     app.UseSwaggerUI(options =>
     {
