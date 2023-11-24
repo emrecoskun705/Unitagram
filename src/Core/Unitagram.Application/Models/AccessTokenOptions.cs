@@ -1,6 +1,6 @@
 ﻿namespace Unitagram.Application.Models;
 
-public class AccessTokenSettings
+public sealed class AccessTokenOptions
 {
     public string Key { get; init; } = string.Empty;
     public string Issuer { get; init; } = string.Empty;

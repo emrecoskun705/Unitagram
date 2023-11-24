@@ -15,7 +15,7 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services,  IConfiguration configuration)
     {
-        services.Configure<AccessTokenSettings>(configuration.GetSection(nameof(AccessTokenSettings)));
+        services.Configure<AccessTokenOptions>(configuration.GetSection(nameof(AccessTokenOptions)));
         
         // Add JWT
         services.AddAuthentication(options =>
@@ -25,17 +25,17 @@ public static class DependencyInjection
             })
             .AddJwtBearer(options =>
             {
-                // var jwtConfig = configuration.GetSection(nameof(JwtSettings)).Get<JwtSettings>()!;
+                var jwtConfig = configuration.GetSection(nameof(AccessTokenOptions)).Get<AccessTokenOptions>()!;
 
                 options.TokenValidationParameters = new TokenValidationParameters()
                 {
                     ValidateAudience = true,
-                    ValidAudience = "",//jwtConfig.Audience,
+                    ValidAudience = jwtConfig.Audience,
                     ValidateIssuer = true,
-                    ValidIssuer = "",//jwtConfig.Issuer,
+                    ValidIssuer = jwtConfig.Issuer,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("jwtConfig.Key")),
+                    IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(jwtConfig.Key)),
                 };
             });
         

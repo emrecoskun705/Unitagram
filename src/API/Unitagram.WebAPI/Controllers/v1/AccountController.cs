@@ -1,6 +1,10 @@
 ﻿namespace Unitagram.WebAPI.Controllers.v1;
 
-public class AccountController
+
+/// <summary>
+/// Account authentication controller
+/// </summary>
+public class AccountController : UnauthorizedControllerBase
 {
     
 }

@@ -1,5 +1,8 @@
 using System.Globalization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Serilog;
 using Unitagram.Application;
 using Unitagram.Infrastructure;
@@ -15,6 +18,17 @@ builder.Host.UseSerilog((context,  services,  loggerConfiguration) =>
     loggerConfiguration
         .ReadFrom.Configuration(context.Configuration) // Read configuration settings from built-in IConfiguration (appsettings.json)
         .ReadFrom.Services(services);// reads out current app's services and make them available to serilog
+});
+
+// load configuration settings
+builder.Services.AddControllers(options =>
+{
+    //Authorization policy
+    var policy = new AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme) // If you do not add AuthenticationScheme you will get an error for invalid JWT tokens
+        .Build();
+    options.Filters.Add(new AuthorizeFilter(policy));
 });
 
 builder.Services.AddInfrastructureServices(builder.Configuration);

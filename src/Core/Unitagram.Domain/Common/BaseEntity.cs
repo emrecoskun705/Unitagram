@@ -4,7 +4,7 @@ namespace Unitagram.Domain.Common;
 
 public abstract class BaseEntity<TEntityId>
 {
-    public TEntityId Id { get; init; }
+    public TEntityId Id { get; init; } = default!;
 
     private readonly List<BaseEvent> _domainEvents = new();
     
