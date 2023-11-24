@@ -2,7 +2,7 @@
 
 namespace Unitagram.Persistence.Identity;
 
-public class ApplicationUser : IdentityUser<Guid>
+public sealed class ApplicationUser : IdentityUser<Guid>
 {
     
 }

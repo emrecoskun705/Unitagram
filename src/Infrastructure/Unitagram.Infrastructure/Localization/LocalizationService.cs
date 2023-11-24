@@ -4,7 +4,7 @@ using Unitagram.Application.Contracts.Common;
 
 namespace Unitagram.Infrastructure.Localization;
 
-public sealed class LocalizationService : ILocalizationService
+internal sealed class LocalizationService : ILocalizationService
 {
     private readonly IStringLocalizer _localizer;
 

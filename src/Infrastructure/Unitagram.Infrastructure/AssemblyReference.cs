@@ -1,6 +1,6 @@
 ﻿namespace Unitagram.Infrastructure;
 
-public class AssemblyReference
+public sealed class AssemblyReference
 {
     
 }

@@ -6,7 +6,7 @@ using Unitagram.Domain.Shared;
 
 namespace Unitagram.Persistence.Identity;
 
-public class IdentityService : IIdentityService
+internal sealed class IdentityService : IIdentityService
 {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly IUserClaimsPrincipalFactory<ApplicationUser> _userClaimsPrincipalFactory;

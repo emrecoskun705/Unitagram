@@ -1,6 +1,6 @@
 ﻿namespace Unitagram.Application;
 
-public class AssemblyReference
+public sealed class AssemblyReference
 {
     
 }
