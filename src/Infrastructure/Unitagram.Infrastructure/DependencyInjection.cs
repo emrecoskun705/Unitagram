@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using System.Globalization;
+using System.Resources;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Unitagram.Application.Contracts.Common;
 using Unitagram.Application.Models;
+using Unitagram.Infrastructure.Localization;
 
 namespace Unitagram.Infrastructure;
 
@@ -36,6 +40,9 @@ public static class DependencyInjection
             });
         
         services.AddAuthorization();
+        
+        services.AddLocalization(options => options.ResourcesPath = "Localization");
+        services.AddSingleton<ILocalizationService, LocalizationService>();
 
         
         return services;

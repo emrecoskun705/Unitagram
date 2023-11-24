@@ -1,0 +1,80 @@
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="Identity.ConcurrencyFailure" xml:space="preserve">
+        <value>Güncelleme sırasında veri çakışması hatası.</value>
+    </data>
+    <data name="Identity.PasswordMismatch" xml:space="preserve">
+        <value>Yanlış şifre.</value>
+    </data>
+    <data name="Identity.InvalidToken" xml:space="preserve">
+        <value>Geçersiz token.</value>
+    </data>
+    <data name="Identity.RecoveryCodeRedemptionFailed" xml:space="preserve">
+        <value>Kurtarma kodunu kullanma hatası.</value>
+    </data>
+    <data name="Identity.LoginAlreadyAssociated" xml:space="preserve">
+        <value>Başka bir hesapta giriş yapılmıştır.</value>
+    </data>
+    <data name="Identity.InvalidUserName" xml:space="preserve">
+        <value>Belirtilen kullanıcı adı geçersiz.</value>
+    </data>
+    <data name="Identity.InvalidEmail" xml:space="preserve">
+        <value>Belirtilen e-posta geçersiz.</value>
+    </data>
+    <data name="Identity.DuplicateUserName" xml:space="preserve">
+        <value>Belirtilen kullanıcı adı zaten var.</value>
+    </data>
+    <data name="Identity.DuplicateEmail" xml:space="preserve">
+        <value>E-posta zaten bir hesapla ilişkilendirilmiş.</value>
+    </data>
+    <data name="Identity.InvalidRoleName" xml:space="preserve">
+        <value>Rol adı geçersiz.</value>
+    </data>
+    <data name="Identity.DuplicateRoleName" xml:space="preserve">
+        <value>Rol adı zaten var.</value>
+    </data>
+    <data name="Identity.UserAlreadyHasPassword" xml:space="preserve">
+        <value>Kullanıcının zaten bir şifresi var.</value>
+    </data>
+    <data name="Identity.UserLockoutNotEnabled" xml:space="preserve">
+        <value>Kullanıcı kilitleme etkin değil.</value>
+    </data>
+    <data name="Identity.UserNotInRole" xml:space="preserve">
+        <value>Kullanıcı belirtilen rolde değil.</value>
+    </data>
+    <data name="Identity.PasswordTooShort" xml:space="preserve">
+        <value>Şifre minimum uzunluk gereksinimlerini karşılamıyor.</value>
+    </data>
+    <data name="Identity.PasswordRequiresUniqueChars" xml:space="preserve">
+        <value>Şifre minimum benzersiz karakter sayısını karşılamıyor.</value>
+    </data>
+    <data name="Identity.PasswordRequiresNonAlphanumeric" xml:space="preserve">
+        <value>Şifre alfasayısal olmayan bir karakter içermelidir.</value>
+    </data>
+    <data name="Identity.PasswordRequiresDigit" xml:space="preserve">
+        <value>Şifre sayısal bir karakter içermelidir.</value>
+    </data>
+    <data name="Identity.PasswordRequiresLower" xml:space="preserve">
+        <value>Şifre küçük harf içermelidir.</value>
+    </data>
+    <data name="Identity.PasswordRequiresUpper" xml:space="preserve">
+        <value>Şifre büyük harf içermelidir.</value>
+    </data>
+    <data name="Identity.UserAlreadyInRole" xml:space="preserve">
+        <value>Kullanıcı zaten belirtilen rolde.</value>
+    </data>
+    <data name="Identity.DefaultError" xml:space="preserve">
+        <value>Tanımlanmamış hata.</value>
+    </data>
+</root>

@@ -1,3 +1,5 @@
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 using Serilog;
 using Unitagram.Application;
 using Unitagram.Infrastructure;
@@ -58,6 +60,21 @@ app.UseCors("all");
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+var supportedCultures = new[]
+{
+    new CultureInfo("en"),
+    new CultureInfo("tr"),
+};
+
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture("en"),
+    SupportedCultures = supportedCultures,
+    SupportedUICultures = supportedCultures,
+});
+
+app.MapControllers();
 
 app.Run();
 

@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="Identity.DefaultError" xml:space="preserve">
+        <value>Undefined error.</value>
+    </data>
+    <data name="Identity.ConcurrencyFailure" xml:space="preserve">
+        <value>Data conflict error during update.</value>
+    </data>
+    <data name="Identity.PasswordMismatch" xml:space="preserve">
+        <value> Incorrect password.</value>
+    </data>
+    <data name="Identity.InvalidToken" xml:space="preserve">
+        <value>Invalid token.</value>
+    </data>
+    <data name="Identity.RecoveryCodeRedemptionFailed" xml:space="preserve">
+        <value>Failure in redeeming recovery code.</value>
+    </data>
+    <data name="Identity.LoginAlreadyAssociated" xml:space="preserve">
+        <value>External login is already associated with an account.</value>
+    </data>
+    <data name="Identity.InvalidUserName" xml:space="preserve">
+        <value>The specified username is invalid.</value>
+    </data>
+    <data name="Identity.InvalidEmail" xml:space="preserve">
+        <value>The specified email is invalid.</value>
+    </data>
+    <data name="Identity.DuplicateUserName" xml:space="preserve">
+        <value>The specified username already exists.</value>
+    </data>
+    <data name="Identity.DuplicateEmail" xml:space="preserve">
+        <value>Email is already associated with an account.</value>
+    </data>
+    <data name="Identity.InvalidRoleName" xml:space="preserve">
+        <value> Role name is invalid.</value>
+    </data>
+    <data name="Identity.DuplicateRoleName" xml:space="preserve">
+        <value>Eole name already exists.</value>
+    </data>
+    <data name="Identity.UserAlreadyHasPassword" xml:space="preserve">
+        <value>User already has a password.</value>
+    </data>
+    <data name="Identity.UserLockoutNotEnabled" xml:space="preserve">
+        <value>User lockout is not enabled.</value>
+    </data>
+    <data name="Identity.UserAlreadyInRole" xml:space="preserve">
+        <value>User is already in the specified role.</value>
+    </data>
+    <data name="Identity.UserNotInRole" xml:space="preserve">
+        <value>User is not in the specified role.</value>
+    </data>
+    <data name="Identity.PasswordTooShort" xml:space="preserve">
+        <value>Password does not meet minimum length requirements.</value>
+    </data>
+    <data name="Identity.PasswordRequiresUniqueChars" xml:space="preserve">
+        <value>Password does not meet the minimum number of unique characters.</value>
+    </data>
+    <data name="Identity.PasswordRequiresNonAlphanumeric" xml:space="preserve">
+        <value>Password must contain a non-alphanumeric character.</value>
+    </data>
+    <data name="Identity.PasswordRequiresDigit" xml:space="preserve">
+        <value>Password must contain a numeric character.</value>
+    </data>
+    <data name="Identity.PasswordRequiresLower" xml:space="preserve">
+        <value>Password must contain a lowercase letter.</value>
+    </data>
+    <data name="Identity.PasswordRequiresUpper" xml:space="preserve">
+        <value>Password must contain an uppercase letter.</value>
+    </data>
+</root>
