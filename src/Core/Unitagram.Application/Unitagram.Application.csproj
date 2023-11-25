@@ -18,7 +18,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Identity\Register\" />
+      <Folder Include="Users\LoginUser\" />
+      <Folder Include="Users\Register\" />
     </ItemGroup>
 
 </Project>

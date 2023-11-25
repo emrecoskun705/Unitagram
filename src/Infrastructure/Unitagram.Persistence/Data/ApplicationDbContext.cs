@@ -6,7 +6,7 @@ using Unitagram.Persistence.Identity;
 
 namespace Unitagram.Persistence.Data;
 
-public class ApplicationDbContext : IdentityDbContext<ApplicationUser,ApplicationRole, Guid>, IApplicationDbContext
+public class ApplicationDbContext : DbContext, IApplicationDbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
