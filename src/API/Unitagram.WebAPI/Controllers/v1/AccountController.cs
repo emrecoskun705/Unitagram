@@ -4,7 +4,7 @@
 /// <summary>
 /// Account authentication controller
 /// </summary>
-public class AccountController : UnauthorizedControllerBase
+public class AccountController : CustomControllerBase
 {
     
 }

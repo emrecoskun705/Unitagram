@@ -3,11 +3,10 @@
 namespace Unitagram.WebAPI.Controllers;
 
 /// <summary>
-/// Email Authorized Confirmation filter
+/// Unauthorized controller base
 /// </summary>
 [Route("api/v{version:apiVersion}/[controller]")]
 [ApiController]
-// [ServiceFilter(typeof(EmailConfirmationFilter))]
-public class AuthorizedControllerBase : ControllerBase
+public class CustomControllerBase : ControllerBase
 {
 }
