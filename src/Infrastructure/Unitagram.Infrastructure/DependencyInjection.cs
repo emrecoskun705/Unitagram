@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-using System.Resources;
-using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +13,7 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services,  IConfiguration configuration)
     {
-        services.Configure<AccessTokenOptions>(configuration.GetSection(nameof(AccessTokenOptions)));
+        services.Configure<JwtOptions>(configuration.GetSection(nameof(JwtOptions)));
         
         // Add JWT
         services.AddAuthentication(options =>
@@ -25,7 +23,7 @@ public static class DependencyInjection
             })
             .AddJwtBearer(options =>
             {
-                var jwtConfig = configuration.GetSection(nameof(AccessTokenOptions)).Get<AccessTokenOptions>()!;
+                var jwtConfig = configuration.GetSection(nameof(JwtOptions)).Get<JwtOptions>()!;
 
                 options.TokenValidationParameters = new TokenValidationParameters()
                 {
