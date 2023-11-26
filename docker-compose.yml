@@ -9,6 +9,11 @@ services:
       
   unitagram.db:
       image: postgres
+      
+  unitagram.identity:
+    image: jboss/keycloak:latest
+    
     
 volumes: 
   unitagram_data:
+  unitagram_identity:
