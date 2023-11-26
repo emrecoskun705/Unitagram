@@ -1,10 +1,10 @@
 ﻿using System.Reflection;
 using Microsoft.EntityFrameworkCore;
-using Unitagram.Application.Contracts.Common;
+using Unitagram.Domain.Common;
 
 namespace Unitagram.Persistence.Data;
 
-public class ApplicationDbContext : DbContext, IApplicationDbContext
+public class ApplicationDbContext : DbContext, IUnitOfWork
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {

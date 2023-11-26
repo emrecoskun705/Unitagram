@@ -2,7 +2,7 @@
 
 namespace Unitagram.Domain.Common;
 
-public abstract class BaseEntity<TEntityId>
+public abstract class BaseEntity<TEntityId> : IEntity
 {
     public TEntityId Id { get; init; } = default!;
 
@@ -13,9 +13,6 @@ public abstract class BaseEntity<TEntityId>
     protected BaseEntity() {
 
     }
-
-    [NotMapped]
-    public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 
     public void AddDomainEvent(IDomainEvent domainEvent)
     {
@@ -30,5 +27,10 @@ public abstract class BaseEntity<TEntityId>
     public void ClearDomainEvents()
     {
         _domainEvents.Clear();
+    }
+
+    public IReadOnlyList<IDomainEvent> GetDomainEvents()
+    {
+        return _domainEvents.AsReadOnly();
     }
 }
