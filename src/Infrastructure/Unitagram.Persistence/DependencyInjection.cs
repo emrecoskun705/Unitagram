@@ -15,12 +15,16 @@ public static class DependencyInjection
     {
         var connectionString = configuration.GetConnectionString("Default");
         
-        Guard.Against.Null(connectionString, message: "Connection string 'DefaultConnection' not found.");
+        Guard.Against.NullOrEmpty(connectionString, message: "Connection string 'DefaultConnection' not found.");
         
         services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
-        
-        services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseNpgsql(connectionString));
+
+        services.AddDbContext<ApplicationDbContext>((sp, options) =>
+        {
+            options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
+            
+            options.UseNpgsql(connectionString);
+        });
         
         services.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<ApplicationDbContext>());
         services.AddScoped<ApplicationDbContextInitialiser>();

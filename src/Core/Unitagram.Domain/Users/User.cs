@@ -6,11 +6,6 @@ namespace Unitagram.Domain.Users;
 
 public class User : BaseEntity<UserId>
 {
-    private User()
-    {
-        
-    }
-    
     private User(UserId id, FirstName firstName, LastName lastName, Email email, UserName userName) : base(id)
     {
         FirstName = firstName;

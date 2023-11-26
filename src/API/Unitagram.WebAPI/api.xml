@@ -9,12 +9,7 @@
             Assembly reference for WebAPI project
             </summary>
         </member>
-        <member name="T:Unitagram.WebAPI.Controllers.AuthorizedControllerBase">
-            <summary>
-            Email Authorized Confirmation filter
-            </summary>
-        </member>
-        <member name="T:Unitagram.WebAPI.Controllers.UnauthorizedControllerBase">
+        <member name="T:Unitagram.WebAPI.Controllers.CustomControllerBase">
             <summary>
             Unauthorized controller base
             </summary>
@@ -23,18 +18,6 @@
             <summary>
             Account authentication controller
             </summary>
-        </member>
-        <member name="T:Unitagram.WebAPI.Controllers.v1.TestController">
-            <summary>
-            test
-            </summary>
-        </member>
-        <member name="M:Unitagram.WebAPI.Controllers.v1.TestController.test">
-            <summary>
-            test
-            </summary>
-            <param name="stringLocalizer">test</param>
-            <returns>test</returns>
         </member>
         <member name="T:Unitagram.WebAPI.Middleware.ExceptionMiddleware">
             <summary>
