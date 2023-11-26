@@ -1,11 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Unitagram.Application.Contracts.Common;
 using Unitagram.Persistence.Data;
-using Unitagram.Persistence.Identity;
 
 namespace Unitagram.Persistence;
 

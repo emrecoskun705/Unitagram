@@ -6,7 +6,7 @@ public abstract class BaseEntity<TEntityId>
 {
     public TEntityId Id { get; init; } = default!;
 
-    private readonly List<BaseEvent> _domainEvents = new();
+    private readonly List<IDomainEvent> _domainEvents = new();
     
     protected BaseEntity(TEntityId id) => Id = id;
 
@@ -15,14 +15,14 @@ public abstract class BaseEntity<TEntityId>
     }
 
     [NotMapped]
-    public IReadOnlyCollection<BaseEvent> DomainEvents => _domainEvents.AsReadOnly();
+    public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 
-    public void AddDomainEvent(BaseEvent domainEvent)
+    public void AddDomainEvent(IDomainEvent domainEvent)
     {
         _domainEvents.Add(domainEvent);
     }
 
-    public void RemoveDomainEvent(BaseEvent domainEvent)
+    public void RemoveDomainEvent(IDomainEvent domainEvent)
     {
         _domainEvents.Remove(domainEvent);
     }
