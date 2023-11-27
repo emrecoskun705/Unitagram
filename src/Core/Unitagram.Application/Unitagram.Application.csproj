@@ -19,7 +19,6 @@
 
     <ItemGroup>
       <Folder Include="Users\LoginUser\" />
-      <Folder Include="Users\Register\" />
     </ItemGroup>
 
 </Project>

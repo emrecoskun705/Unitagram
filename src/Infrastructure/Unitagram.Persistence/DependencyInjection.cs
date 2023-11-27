@@ -3,8 +3,10 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Unitagram.Domain.Common;
+using Unitagram.Domain.Users;
 using Unitagram.Persistence.Data;
 using Unitagram.Persistence.Data.Interceptors;
+using Unitagram.Persistence.Repositories;
 
 namespace Unitagram.Persistence;
 
@@ -25,6 +27,8 @@ public static class DependencyInjection
             
             options.UseNpgsql(connectionString);
         });
+        
+        services.AddScoped<IUserRepository, UserRepository>();
         
         services.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<ApplicationDbContext>());
         services.AddScoped<ApplicationDbContextInitialiser>();

@@ -41,7 +41,15 @@ public static class DependencyInjection
         services.ConfigureOptions<JwtBearerOptionsSetup>();
         services.Configure<KeycloakOptions>(configuration.GetSection("Keycloak"));
         
-        services.AddAuthorization();
+        services.AddTransient<AdminAuthorizationDelegatingHandler>();
+        services.AddHttpClient<IAuthenticationService, AuthenticationService>((sp, client) =>
+        {
+
+            var opt = sp.GetRequiredService<IOptions<KeycloakOptions>>().Value;
+            client.BaseAddress = new Uri(opt.AdminUrl);
+
+
+        }).AddHttpMessageHandler<AdminAuthorizationDelegatingHandler>();
         
         services.AddHttpClient<IAccessTokenService, JwtService>((sp, client) => {
 
@@ -50,6 +58,7 @@ public static class DependencyInjection
 
         });
         
+        services.AddAuthorization();
         IdentityModelEventSource.ShowPII = true;
     }
 

@@ -14,7 +14,7 @@
             Unauthorized controller base
             </summary>
         </member>
-        <member name="T:Unitagram.WebAPI.Controllers.v1.AccountController">
+        <member name="T:Unitagram.WebAPI.Controllers.v1.Accounts.AccountController">
             <summary>
             Account authentication controller
             </summary>
