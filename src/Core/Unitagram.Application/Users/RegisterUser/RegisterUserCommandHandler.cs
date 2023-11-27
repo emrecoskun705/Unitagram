@@ -1,4 +1,4 @@
-﻿using Unitagram.Application.Contracts.Identity;
+﻿using Unitagram.Application.Contracts.Authentication;
 using Unitagram.Application.Contracts.Messaging;
 using Unitagram.Domain.Common;
 using Unitagram.Domain.Shared;
@@ -9,16 +9,16 @@ namespace Unitagram.Application.Users.RegisterUser;
 
 public class RegisterUserCommandHandler : ICommandHandler<RegisterUserCommand, Guid>
 {
-    private readonly IAuthenticationService _authenticationService;
+    private readonly ICreateUserService _createUserService;
     private readonly IUserRepository _userRepository;
     private readonly IUnitOfWork _unitOfWork;
     
     public RegisterUserCommandHandler(
-        IAuthenticationService authenticationService,
+        ICreateUserService createUserService,
         IUserRepository userRepository,
         IUnitOfWork unitOfWork)
     {
-        _authenticationService = authenticationService;
+        _createUserService = createUserService;
         _userRepository = userRepository;
         _unitOfWork = unitOfWork;
     }
@@ -32,7 +32,7 @@ public class RegisterUserCommandHandler : ICommandHandler<RegisterUserCommand, G
             new Email(request.Email),
             new UserName(request.UserName));
         
-        var identityId = await _authenticationService.CreateUserAsync(
+        var identityId = await _createUserService.CreateUserAsync(
             user,
             request.Password,
             cancellationToken);

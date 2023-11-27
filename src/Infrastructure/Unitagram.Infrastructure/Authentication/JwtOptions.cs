@@ -1,4 +1,4 @@
-﻿namespace Unitagram.Application.Models;
+﻿namespace Unitagram.Infrastructure.Authentication;
 
 public sealed record JwtOptions
 {

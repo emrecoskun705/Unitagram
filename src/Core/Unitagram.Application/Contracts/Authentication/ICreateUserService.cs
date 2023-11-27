@@ -1,9 +1,9 @@
 ﻿using Unitagram.Domain.Shared;
 using Unitagram.Domain.Users;
 
-namespace Unitagram.Application.Contracts.Identity;
+namespace Unitagram.Application.Contracts.Authentication;
 
-public interface IAuthenticationService
+public interface ICreateUserService
 {
     Task<Result<string>> CreateUserAsync(User user, string password, CancellationToken cancellationToken = default);
 }

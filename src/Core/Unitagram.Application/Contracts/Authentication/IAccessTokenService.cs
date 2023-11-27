@@ -1,6 +1,6 @@
 ﻿using Unitagram.Application.Models;
 
-namespace Unitagram.Application.Contracts.Identity;
+namespace Unitagram.Application.Contracts.Authentication;
 
 public interface IAccessTokenService
 {

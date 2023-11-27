@@ -1,18 +1,18 @@
 ﻿using System.Net.Http.Json;
-using Unitagram.Application.Contracts.Identity;
+using Unitagram.Application.Contracts.Authentication;
 using Unitagram.Domain.Shared;
 using Unitagram.Domain.Users;
 using Unitagram.Infrastructure.Authentication.Models;
 
 namespace Unitagram.Infrastructure.Authentication;
 
-internal sealed class AuthenticationService : IAuthenticationService
+internal sealed class CreateUserService : ICreateUserService
 {
     private const string PasswordCredentialType = "password";
 
     private readonly HttpClient _httpClient;
 
-    public AuthenticationService(HttpClient httpClient)
+    public CreateUserService(HttpClient httpClient)
     {
         _httpClient = httpClient;
     }

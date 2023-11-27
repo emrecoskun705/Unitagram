@@ -5,8 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Unitagram.Application.Contracts.Authentication;
 using Unitagram.Application.Contracts.Common;
-using Unitagram.Application.Contracts.Identity;
 using Unitagram.Application.Models;
 using Unitagram.Infrastructure.Authentication;
 using Unitagram.Infrastructure.Localization;
@@ -42,7 +42,7 @@ public static class DependencyInjection
         services.Configure<KeycloakOptions>(configuration.GetSection("Keycloak"));
         
         services.AddTransient<AdminAuthorizationDelegatingHandler>();
-        services.AddHttpClient<IAuthenticationService, AuthenticationService>((sp, client) =>
+        services.AddHttpClient<ICreateUserService, CreateUserService>((sp, client) =>
         {
 
             var opt = sp.GetRequiredService<IOptions<KeycloakOptions>>().Value;
