@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Unitagram.Application.Users.LoginUser;
 using Unitagram.Application.Users.RegisterUser;
 
 namespace Unitagram.WebAPI.Controllers.v1.Accounts;
@@ -47,6 +48,29 @@ public class AccountController : CustomControllerBase
         if (result.IsFailure)
         {
             return BadRequest(result.Error);
+        }
+
+        return Ok(result.Value);
+    }
+    
+    /// <summary>
+    /// Handles user login requests.
+    /// </summary>
+    /// <param name="request">Login request data.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns></returns>
+    [HttpPost("login")]
+    public async Task<IActionResult> Login(
+        LoginUserRequest request,
+        CancellationToken cancellationToken)
+    {
+        var command = new LoginUserCommand(request.Email, request.Password);
+
+        var result = await _sender.Send(command, cancellationToken);
+
+        if (result.IsFailure)
+        {
+            return Unauthorized(result.Error);
         }
 
         return Ok(result.Value);
