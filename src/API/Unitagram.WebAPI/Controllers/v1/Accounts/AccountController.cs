@@ -7,19 +7,29 @@ namespace Unitagram.WebAPI.Controllers.v1.Accounts;
 
 
 /// <summary>
-/// Account authentication controller
+/// Controller for handling account authentication operations.
 /// </summary>
 [AllowAnonymous]
-[Asp.Versioning.ApiVersion("1.0")]
+[ApiVersion("1.0")]
 public class AccountController : CustomControllerBase
 {
     private readonly ISender _sender;
     
+    /// <summary>
+    /// Initializes a new instance of the <see cref="AccountController"/> class.
+    /// </summary>
+    /// <param name="sender">The MediatR sender for handling commands.</param>
     public AccountController(ISender sender)
     {
         _sender = sender;
     }
     
+    /// <summary>
+    /// Handles user registration requests.
+    /// </summary>
+    /// <param name="request">The registration request data.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>Returns an IActionResult representing the result of the registration operation.</returns>
     [HttpPost("register")]
     public async Task<IActionResult> Register(
         RegisterUserRequest request,

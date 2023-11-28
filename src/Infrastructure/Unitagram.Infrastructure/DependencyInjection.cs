@@ -35,8 +35,6 @@ public static class DependencyInjection
             })
             .AddJwtBearer();
         
-        services.Configure<JwtOptions>(configuration.GetSection(nameof(JwtOptions)));
-        
         services.Configure<AuthenticationOptions>(configuration.GetSection("Authentication"));
         services.ConfigureOptions<JwtBearerOptionsSetup>();
         services.Configure<KeycloakOptions>(configuration.GetSection("Keycloak"));

@@ -3,7 +3,7 @@
 namespace Unitagram.WebAPI.Controllers;
 
 /// <summary>
-/// Unauthorized controller base
+/// Custom controller base fot api controller
 /// </summary>
 [Route("api/v{version:apiVersion}/[controller]")]
 [ApiController]

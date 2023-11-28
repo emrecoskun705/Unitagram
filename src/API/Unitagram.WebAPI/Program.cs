@@ -1,8 +1,8 @@
 using System.Globalization;
-using Asp.Versioning;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Serilog;
 using Unitagram.Application;
@@ -10,6 +10,7 @@ using Unitagram.Infrastructure;
 using Unitagram.Persistence;
 using Unitagram.Persistence.Data;
 using Unitagram.WebAPI.Middleware;
+using Microsoft.AspNetCore.Mvc.Versioning;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,7 +51,8 @@ if (builder.Environment.IsDevelopment() || builder.Environment.IsProduction())
     builder.Services.AddEndpointsApiExplorer(); // generates description for all endpoints
     builder.Services.AddSwaggerGen(options =>
     {
-        options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "api.xml"));
+        var asd = AppContext.BaseDirectory;
+        options.IncludeXmlComments(Path.Combine(asd, "api.xml"));
 
         options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo()
         {
@@ -100,14 +102,14 @@ if (builder.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 
-if (builder.Environment.IsDevelopment() || builder.Environment.IsProduction())
+if (builder.Environment.IsDevelopment())
 {
     app.UseSwagger(); // creates endpoints for swagger.json
     app.UseSwaggerUI(options =>
     {
         string swaggerJsonBasePath = string.IsNullOrWhiteSpace(options.RoutePrefix) ? "." : "..";
-        options.SwaggerEndpoint($"{swaggerJsonBasePath}/swagger/v1/swagger.json", "1.0");
-        options.SwaggerEndpoint($"{swaggerJsonBasePath}/swagger/v2/swagger.json", "2.0");
+        options.SwaggerEndpoint($"/swagger/v1/swagger.json", "1.0");
+        options.SwaggerEndpoint($"/swagger/v2/swagger.json", "2.0");
     });
 }
 
