@@ -99,7 +99,7 @@ if (builder.Environment.IsProduction())
 
 if (builder.Environment.IsDevelopment())
 {
-    app.UseDeveloperExceptionPage();
+    // app.UseDeveloperExceptionPage();
 }
 
 if (builder.Environment.IsDevelopment())

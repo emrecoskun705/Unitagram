@@ -41,7 +41,8 @@ public class AccountController : CustomControllerBase
             request.UserName,
             request.FirstName,
             request.LastName,
-            request.Password);
+            request.Password,
+            request.ConfirmPassword);
 
         var result = await _sender.Send(command, cancellationToken);
 
