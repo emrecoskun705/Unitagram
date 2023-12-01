@@ -39,8 +39,6 @@ public class AccountController : CustomControllerBase
         var command = new RegisterUserCommand(
             request.Email,
             request.UserName,
-            request.FirstName,
-            request.LastName,
             request.Password,
             request.ConfirmPassword);
 

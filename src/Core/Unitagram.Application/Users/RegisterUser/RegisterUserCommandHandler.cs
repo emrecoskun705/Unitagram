@@ -27,8 +27,8 @@ public class RegisterUserCommandHandler : ICommandHandler<RegisterUserCommand, G
     public async Task<Result<Guid>> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
     {
         var user = User.Create(
-            new FirstName(request.FirstName),
-            new LastName(request.LastName),
+            new FirstName(string.Empty), // firstname empty
+            new LastName(string.Empty), // lastname empty
             new Email(request.Email),
             new UserName(request.UserName));
         

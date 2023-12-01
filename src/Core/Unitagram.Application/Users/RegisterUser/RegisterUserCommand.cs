@@ -5,7 +5,5 @@ namespace Unitagram.Application.Users.RegisterUser;
 public sealed record RegisterUserCommand(
     string Email,
     string UserName,
-    string FirstName,
-    string LastName,
     string Password,
     string ConfirmPassword) : ICommand<Guid>;

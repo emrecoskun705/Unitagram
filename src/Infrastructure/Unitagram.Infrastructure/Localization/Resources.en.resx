@@ -84,4 +84,88 @@
     <data name="Identity.PasswordRequiresUpper" xml:space="preserve">
         <value>Password must contain an uppercase letter.</value>
     </data>
+    <data name="AccountLockout" xml:space="preserve">
+        <value>Please try again in {0} minutes later.</value>
+    </data>
+    <data name="ConfirmPasswordCantBlank" xml:space="preserve">
+        <value>Confirm password can't be blank</value>
+    </data>
+    <data name="EmailAlreadyConfirmedException" xml:space="preserve">
+        <value>Your email has already been confirmed successfully!</value>
+    </data>
+    <data name="EmailCantBlank" xml:space="preserve">
+        <value>Email can not be blank.</value>
+    </data>
+    <data name="EmailInvalidCodeException" xml:space="preserve">
+        <value>Code is not correct. You have got {0} left.</value>
+    </data>
+    <data name="EmailInvalidFormat" xml:space="preserve">
+        <value>Email should be in a proper email address format</value>
+    </data>
+    <data name="EmailOtpNotFoundException" xml:space="preserve">
+        <value>Code not found. Please resend code.</value>
+    </data>
+    <data name="InvalidAccountCredentials" xml:space="preserve">
+        <value>Account login information is invalid.</value>
+    </data>
+    <data name="InvalidUsername" xml:space="preserve">
+        <value>Invalid username, please change your username.</value>
+    </data>
+    <data name="OtpCodeTryAgainLaterException" xml:space="preserve">
+        <value>Please wait for {0} minutes before attempting to create new code again.</value>
+    </data>
+    <data name="PasswordContainLowercase" xml:space="preserve">
+        <value>Password must contain at least one lowercase letter.</value>
+    </data>
+    <data name="PasswordContainUppercase" xml:space="preserve">
+        <value>Password must contain at least one uppercase letter.</value>
+    </data>
+    <data name="PasswordMaxChar" xml:space="preserve">
+        <value>Password should be maximum of 50 characters.</value>
+    </data>
+    <data name="PasswordMaxLength" xml:space="preserve">
+        <value>Password should be maximum of 50 characters long</value>
+    </data>
+    <data name="PasswordMinLength" xml:space="preserve">
+        <value>Password should be minimum 8 characters long</value>
+    </data>
+    <data name="PasswordNotEquals" xml:space="preserve">
+        <value>Şifre ve şifreyi onayla eşleşmiyor.</value>
+    </data>
+    <data name="PasswordShouldntEmpty" xml:space="preserve">
+        <value>Password shouldn't be empty.</value>
+    </data>
+    <data name="PhoneNumberOnlyDigit" xml:space="preserve">
+        <value>Phone number should contain only digits.</value>
+    </data>
+    <data name="ReachedMaximumCodeUsageException" xml:space="preserve">
+        <value>You've reached maximum code usage. Please resend code again.</value>
+    </data>
+    <data name="TokenNotEmpty" xml:space="preserve">
+        <value>Token can't be empty. Please log in again.</value>
+    </data>
+    <data name="UniversityDomainNotFound" xml:space="preserve">
+        <value>There is no university for given domain.</value>
+    </data>
+    <data name="UsernameExists" xml:space="preserve">
+        <value>Username already exists.</value>
+    </data>
+    <data name="UsernameMaxChar" xml:space="preserve">
+        <value>Username should be maximum of 100 characters.</value>
+    </data>
+    <data name="UsernameMaxLength" xml:space="preserve">
+        <value>Username should be maximum of 15 characters long</value>
+    </data>
+    <data name="UsernameMinLength" xml:space="preserve">
+        <value>Username should be minimum 4 characters long</value>
+    </data>
+    <data name="UsernameNotFound" xml:space="preserve">
+        <value>Username not found.</value>
+    </data>
+    <data name="UsernameShouldntEmpty" xml:space="preserve">
+        <value>Username shouldn't be empty.</value>
+    </data>
+    <data name="UserNotFound" xml:space="preserve">
+        <value>User not found.</value>
+    </data>
 </root>

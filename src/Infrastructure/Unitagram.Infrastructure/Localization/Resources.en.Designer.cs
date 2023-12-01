@@ -60,6 +60,69 @@ namespace Unitagram.Infrastructure.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please try again in {0} minutes later..
+        /// </summary>
+        internal static string AccountLockout {
+            get {
+                return ResourceManager.GetString("AccountLockout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm password can&apos;t be blank.
+        /// </summary>
+        internal static string ConfirmPasswordCantBlank {
+            get {
+                return ResourceManager.GetString("ConfirmPasswordCantBlank", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your email has already been confirmed successfully!.
+        /// </summary>
+        internal static string EmailAlreadyConfirmedException {
+            get {
+                return ResourceManager.GetString("EmailAlreadyConfirmedException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email can not be blank..
+        /// </summary>
+        internal static string EmailCantBlank {
+            get {
+                return ResourceManager.GetString("EmailCantBlank", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Code is not correct. You have got {0} left..
+        /// </summary>
+        internal static string EmailInvalidCodeException {
+            get {
+                return ResourceManager.GetString("EmailInvalidCodeException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email should be in a proper email address format.
+        /// </summary>
+        internal static string EmailInvalidFormat {
+            get {
+                return ResourceManager.GetString("EmailInvalidFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Code not found. Please resend code..
+        /// </summary>
+        internal static string EmailOtpNotFoundException {
+            get {
+                return ResourceManager.GetString("EmailOtpNotFoundException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Data conflict error during update..
         /// </summary>
         internal static string Identity_ConcurrencyFailure {
@@ -254,6 +317,195 @@ namespace Unitagram.Infrastructure.Localization {
         internal static string Identity_UserNotInRole {
             get {
                 return ResourceManager.GetString("Identity.UserNotInRole", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account login information is invalid..
+        /// </summary>
+        internal static string InvalidAccountCredentials {
+            get {
+                return ResourceManager.GetString("InvalidAccountCredentials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid username, please change your username..
+        /// </summary>
+        internal static string InvalidUsername {
+            get {
+                return ResourceManager.GetString("InvalidUsername", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please wait for {0} minutes before attempting to create new code again..
+        /// </summary>
+        internal static string OtpCodeTryAgainLaterException {
+            get {
+                return ResourceManager.GetString("OtpCodeTryAgainLaterException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password must contain at least one lowercase letter..
+        /// </summary>
+        internal static string PasswordContainLowercase {
+            get {
+                return ResourceManager.GetString("PasswordContainLowercase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password must contain at least one uppercase letter..
+        /// </summary>
+        internal static string PasswordContainUppercase {
+            get {
+                return ResourceManager.GetString("PasswordContainUppercase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password should be maximum of 50 characters..
+        /// </summary>
+        internal static string PasswordMaxChar {
+            get {
+                return ResourceManager.GetString("PasswordMaxChar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password should be maximum of 50 characters long.
+        /// </summary>
+        internal static string PasswordMaxLength {
+            get {
+                return ResourceManager.GetString("PasswordMaxLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password should be minimum 8 characters long.
+        /// </summary>
+        internal static string PasswordMinLength {
+            get {
+                return ResourceManager.GetString("PasswordMinLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Şifre ve şifreyi onayla eşleşmiyor..
+        /// </summary>
+        internal static string PasswordNotEquals {
+            get {
+                return ResourceManager.GetString("PasswordNotEquals", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password shouldn&apos;t be empty..
+        /// </summary>
+        internal static string PasswordShouldntEmpty {
+            get {
+                return ResourceManager.GetString("PasswordShouldntEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phone number should contain only digits..
+        /// </summary>
+        internal static string PhoneNumberOnlyDigit {
+            get {
+                return ResourceManager.GetString("PhoneNumberOnlyDigit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You&apos;ve reached maximum code usage. Please resend code again..
+        /// </summary>
+        internal static string ReachedMaximumCodeUsageException {
+            get {
+                return ResourceManager.GetString("ReachedMaximumCodeUsageException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Token can&apos;t be empty. Please log in again..
+        /// </summary>
+        internal static string TokenNotEmpty {
+            get {
+                return ResourceManager.GetString("TokenNotEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is no university for given domain..
+        /// </summary>
+        internal static string UniversityDomainNotFound {
+            get {
+                return ResourceManager.GetString("UniversityDomainNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username already exists..
+        /// </summary>
+        internal static string UsernameExists {
+            get {
+                return ResourceManager.GetString("UsernameExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username should be maximum of 100 characters..
+        /// </summary>
+        internal static string UsernameMaxChar {
+            get {
+                return ResourceManager.GetString("UsernameMaxChar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username should be maximum of 15 characters long.
+        /// </summary>
+        internal static string UsernameMaxLength {
+            get {
+                return ResourceManager.GetString("UsernameMaxLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username should be minimum 4 characters long.
+        /// </summary>
+        internal static string UsernameMinLength {
+            get {
+                return ResourceManager.GetString("UsernameMinLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username not found..
+        /// </summary>
+        internal static string UsernameNotFound {
+            get {
+                return ResourceManager.GetString("UsernameNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username shouldn&apos;t be empty..
+        /// </summary>
+        internal static string UsernameShouldntEmpty {
+            get {
+                return ResourceManager.GetString("UsernameShouldntEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User not found..
+        /// </summary>
+        internal static string UserNotFound {
+            get {
+                return ResourceManager.GetString("UserNotFound", resourceCulture);
             }
         }
     }

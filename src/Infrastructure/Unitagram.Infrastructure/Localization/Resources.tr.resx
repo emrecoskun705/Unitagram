@@ -77,4 +77,88 @@
     <data name="Identity.DefaultError" xml:space="preserve">
         <value>Tanımlanmamış hata.</value>
     </data>
+    <data name="AccountLockout" xml:space="preserve">
+        <value>Lütfen {0} dakika sonra tekrar deneyiniz.</value>
+    </data>
+    <data name="ConfirmPasswordCantBlank" xml:space="preserve">
+        <value>Şifreyi onayla boş olmamalıdır.</value>
+    </data>
+    <data name="EmailAlreadyConfirmedException" xml:space="preserve">
+        <value>E-postanız daha önce onaylanmıştır.</value>
+    </data>
+    <data name="EmailCantBlank" xml:space="preserve">
+        <value>Mail adresi boş olmamalıdır.</value>
+    </data>
+    <data name="EmailInvalidCodeException" xml:space="preserve">
+        <value>Kod doğru değil. {0} hakkınız kaldı.</value>
+    </data>
+    <data name="EmailInvalidFormat" xml:space="preserve">
+        <value>Mail adresi düzgün bir formatta olmalıdır.</value>
+    </data>
+    <data name="EmailOtpNotFoundException" xml:space="preserve">
+        <value>Kod bulunamadı. Lütfen kodu tekrar gönderiniz.</value>
+    </data>
+    <data name="InvalidAccountCredentials" xml:space="preserve">
+        <value>Hesap giriş bilgileri geçersiz.</value>
+    </data>
+    <data name="InvalidUsername" xml:space="preserve">
+        <value>Kullanıcı adı geçersiz, lütfen değiştiriniz.</value>
+    </data>
+    <data name="OtpCodeTryAgainLaterException" xml:space="preserve">
+        <value>Yeni kod oluşturmak için lütfen tekrar {0} dakika sonra deneyin.</value>
+    </data>
+    <data name="PasswordContainLowercase" xml:space="preserve">
+        <value>Şifre en az 1 küçük harf içermelidir.</value>
+    </data>
+    <data name="PasswordContainUppercase" xml:space="preserve">
+        <value>Şifre en az 1 büyük harf içermelidir.</value>
+    </data>
+    <data name="PasswordMaxChar" xml:space="preserve">
+        <value>Şifre en fazla 50 karakter olmalıdır.</value>
+    </data>
+    <data name="PasswordMaxLength" xml:space="preserve">
+        <value>Şifre en fazla 50 karakter olmalıdır.</value>
+    </data>
+    <data name="PasswordMinLength" xml:space="preserve">
+        <value>Şifre en az 8 karakter olmalıdır.</value>
+    </data>
+    <data name="PasswordNotEquals" xml:space="preserve">
+        <value>Password and confirm password does not match.</value>
+    </data>
+    <data name="PasswordShouldntEmpty" xml:space="preserve">
+        <value>Şifre boş olmamalı.</value>
+    </data>
+    <data name="PhoneNumberOnlyDigit" xml:space="preserve">
+        <value>Telefon numarası sadece rakamlardan oluşmalıdır.</value>
+    </data>
+    <data name="ReachedMaximumCodeUsageException" xml:space="preserve">
+        <value>Maksimum tekrar sayısına ulaştınız. Lütfen kodu tekrar gönderiniz.</value>
+    </data>
+    <data name="TokenNotEmpty" xml:space="preserve">
+        <value>Giriş anahtarın boş olmamalıdır. Lütfen tekrar giriş yapmayı deneyiniz.</value>
+    </data>
+    <data name="UniversityDomainNotFound" xml:space="preserve">
+        <value>Mail adresi için bir üniversite bulunamadı.</value>
+    </data>
+    <data name="UsernameExists" xml:space="preserve">
+        <value>Kullanıcı adı kullanılıyor.</value>
+    </data>
+    <data name="UsernameMaxChar" xml:space="preserve">
+        <value>Kullanıcı adı en fazla 100 karakter olmalıdır.</value>
+    </data>
+    <data name="UsernameMaxLength" xml:space="preserve">
+        <value>Kullanıcı adı en fazla 15 karakterden oluşmalıdır.</value>
+    </data>
+    <data name="UsernameMinLength" xml:space="preserve">
+        <value>Kullanıcı adı en az 4 karakterden oluşmalıdır.</value>
+    </data>
+    <data name="UsernameNotFound" xml:space="preserve">
+        <value>Kullanıcı adı bulunamadı.</value>
+    </data>
+    <data name="UsernameShouldntEmpty" xml:space="preserve">
+        <value>Kullanıcı adı boş olmamalı.</value>
+    </data>
+    <data name="UserNotFound" xml:space="preserve">
+        <value>Kullanıcı bulunamadı.</value>
+    </data>
 </root>

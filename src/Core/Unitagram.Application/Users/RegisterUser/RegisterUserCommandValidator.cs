@@ -1,41 +1,36 @@
 using System.Text.RegularExpressions;
 using FluentValidation;
+using Unitagram.Application.Contracts.Common;
 
 namespace Unitagram.Application.Users.RegisterUser;
 
 public class RegisterUserCommandValidator : AbstractValidator<RegisterUserCommand>
 {
-    public RegisterUserCommandValidator()
+    public RegisterUserCommandValidator(ILocalizationService localizationService)
     {
-        RuleFor(c => c.FirstName).NotEmpty();
-
-        RuleFor(c => c.LastName).NotEmpty();
-        
         RuleFor(a => a.Email)
-            .EmailAddress().WithMessage("EmailInvalidFormat")
-            .NotEmpty().WithMessage("EmailCantBlank")
+            .EmailAddress().WithMessage(localizationService["EmailInvalidFormat"])
+            .NotEmpty().WithMessage(localizationService["EmailCantBlank"])
             .NotNull();
 
         RuleFor(a => a.UserName)
-            .NotEmpty().WithMessage("UsernameShouldntEmpty")
+            .NotEmpty().WithMessage(localizationService["UsernameShouldntEmpty"])
             .NotNull()
-            .MinimumLength(4).WithMessage("UsernameMinLength")
-            .MaximumLength(15).WithMessage("UsernameMaxLength")
-            .Must(ValidUsername).WithMessage("InvalidUsername");
-
-        // RuleFor(a => a.PhoneNumber)
-        //     .Must(OnlyDigits).WithMessage("PhoneNumberOnlyDigit");
+            .MinimumLength(4).WithMessage(localizationService["UsernameMinLength"])
+            .MaximumLength(15).WithMessage(localizationService["UsernameMaxLength"])
+            .Must(ValidUsername).WithMessage(localizationService["InvalidUsername"]);
+        
 
         RuleFor(a => a.Password)
-            .NotEmpty().WithMessage("PasswordShouldntEmpty")
-            .MinimumLength(8).WithMessage("PasswordMinLength")
-            .MaximumLength(50).WithMessage("PasswordMaxLength")
-            .Must(RequireUppercase).WithMessage("PasswordContainUppercase")
-            .Must(RequireLowercase).WithMessage("PasswordContainLowercase");
+            .NotEmpty().WithMessage(localizationService["PasswordShouldntEmpty"])
+            .MinimumLength(8).WithMessage(localizationService["PasswordMinLength"])
+            .MaximumLength(50).WithMessage(localizationService["PasswordMaxLength"])
+            .Must(RequireUppercase).WithMessage(localizationService["PasswordContainUppercase"])
+            .Must(RequireLowercase).WithMessage(localizationService["PasswordContainLowercase"]);
 
         RuleFor(a => a.ConfirmPassword)
-            .NotEmpty().WithMessage("ConfirmPasswordCantBlank")
-            .Equal(a => a.Password).WithMessage("PasswordNotEquals");
+            .NotEmpty().WithMessage(localizationService["ConfirmPasswordCantBlank"])
+            .Equal(a => a.Password).WithMessage(localizationService["PasswordNotEquals"]);
     }
     
     private bool RequireUppercase(string args)
@@ -56,14 +51,6 @@ public class RegisterUserCommandValidator : AbstractValidator<RegisterUserComman
             if (char.IsLower(c))
                 return true;
         }
-
-        return false;
-    }
-    
-    private bool OnlyDigits(string arg)
-    {
-        if (Regex.IsMatch(arg, "^[0-9]*$"))
-            return true;
 
         return false;
     }
