@@ -8,8 +8,11 @@ services:
       dockerfile: src/API/Unitagram.WebAPI/Dockerfile
       
   unitagram.db:
-      image: postgres
+    image: postgres
       
+  unitagram.identity.db:
+    image: postgres
+    
   unitagram.identity:
     image: jboss/keycloak:latest
     
@@ -17,3 +20,4 @@ services:
 volumes: 
   unitagram_data:
   unitagram_identity:
+  unitagram_identity_data:
