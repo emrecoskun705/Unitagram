@@ -1,141 +1,58 @@
-﻿namespace Unitagram.Domain.Shared;
+﻿using System.Diagnostics.CodeAnalysis;
 
-/// <summary>
-/// Represents a result of some operation, with status information and possibly an error.
-/// </summary>
+namespace Unitagram.Domain.Shared;
+
 public class Result
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Result"/> class with the specified parameters.
-    /// </summary>
-    /// <param name="isSuccess">The flag indicating if the result is successful.</param>
-    /// <param name="error">The error that occurred.</param>
     protected internal Result(bool isSuccess, Error error)
     {
         if (isSuccess && error != Error.None)
         {
-            throw new InvalidOperationException();
+            throw new InvalidCastException();
         }
 
         if (!isSuccess && error == Error.None)
         {
-            throw new InvalidOperationException();
+            throw new InvalidCastException();
         }
 
         IsSuccess = isSuccess;
         Error = error;
-    }
-
-    /// <summary>
-    /// Gets a value indicating whether the result is a success.
-    /// </summary>
+    }    
+    
+    
     public bool IsSuccess { get; }
-
-    /// <summary>
-    /// Gets a value indicating whether the result is a failure.
-    /// </summary>
     public bool IsFailure => !IsSuccess;
 
-    /// <summary>
-    /// Gets the error.
-    /// </summary>
     public Error Error { get; }
 
-    /// <summary>
-    /// Returns a success <see cref="Result"/>.
-    /// </summary>
-    /// <returns>A new instance of <see cref="Result"/>.</returns>
     public static Result Success() => new(true, Error.None);
-
-    /// <summary>
-    /// Returns a success <see cref="Result{TValue}"/> with the specified value.
-    /// </summary>
-    /// <typeparam name="TValue">The result type.</typeparam>
-    /// <param name="value">The result value.</param>
-    /// <returns>A new instance of <see cref="Result{TValue}"/> with the specified value.</returns>
-    public static Result<TValue> Success<TValue>(TValue value) => new(value, true, Error.None);
-
-    /// <summary>
-    /// Returns a failure <see cref="Result"/> with the specified error.
-    /// </summary>
-    /// <param name="error">The error.</param>
-    /// <returns>A new instance of <see cref="Result"/> with the specified error.</returns>
+    
     public static Result Failure(Error error) => new(false, error);
 
-    /// <summary>
-    /// Returns a failure <see cref="Result{TValue}"/> with the specified error.
-    /// </summary>
-    /// <typeparam name="TValue">The result type.</typeparam>
-    /// <param name="error">The error.</param>
-    /// <returns>A new instance of <see cref="Result{TValue}"/> with the specified error and failure flag set.</returns>
-    public static Result<TValue> Failure<TValue>(Error error) => new(default, false, error);
+    public static Result<T> Success<T>(T value) => new(value, true, Error.None);
+    
+    public static Result<T> Failure<T>(Error error) => new(default!, false, error);
 
-    /// <summary>
-    /// Returns a success <see cref="Result"/>.
-    /// </summary>
-    /// <param name="condition">The condition.</param>
-    /// <returns>A new instance of <see cref="Result"/>.</returns>
-    public static Result Create(bool condition) => condition ? Success() : Failure(Error.ConditionNotMet);
+    public static Result<T> Create<T>(T? value) =>
+        value is not null ? Success(value) : Failure<T>(Error.NullValue);
 
-    /// <summary>
-    /// Creates a new <see cref="Result{TValue}"/> with the specified nullable value and the specified error.
-    /// </summary>
-    /// <typeparam name="TValue">The result type.</typeparam>
-    /// <param name="value">The result value.</param>
-    /// <returns>A new instance of <see cref="Result{TValue}"/> with the specified value or an error.</returns>
-    public static Result<TValue> Create<TValue>(TValue? value) => value is not null ? Success(value) : Failure<TValue>(Error.NullValue);
-
-    /// <summary>
-    /// Returns the first failure from the specified <paramref name="results"/>.
-    /// If there is no failure, a success is returned.
-    /// </summary>
-    /// <param name="results">The results array.</param>
-    /// <returns>
-    /// The first failure from the specified <paramref name="results"/> array,or a success if it does not exist.
-    /// </returns>
-    public static async Task<Result> FirstFailureOrSuccess(params Func<Task<Result>>[] results)
-    {
-        foreach (Func<Task<Result>> resultTask in results)
-        {
-            Result result = await resultTask();
-
-            if (result.IsFailure)
-            {
-                return result;
-            }
-        }
-
-        return Success();
-    }
 }
 
-/// <summary>
-/// Represents the result of some operation, with status information and possibly a value and an error.
-/// </summary>
-/// <typeparam name="TValue">The result value type.</typeparam>
-public class Result<TValue> : Result
+public class Result<T> : Result
 {
-    private readonly TValue? _value;
+    private readonly T? _value;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Result{TValueType}"/> class with the specified parameters.
-    /// </summary>
-    /// <param name="value">The result value.</param>
-    /// <param name="isSuccess">The flag indicating if the result is successful.</param>
-    /// <param name="error">The error.</param>
-    protected internal Result(TValue? value, bool isSuccess, Error error)
-        : base(isSuccess, error) =>
+
+    protected internal Result(T value, bool isSuccess, Error error) : base(isSuccess, error)
+    {
         _value = value;
+    }
 
-    /// <summary>
-    /// Gets the result value if the result is successful, otherwise throws an exception.
-    /// </summary>
-    /// <returns>The result value if the result is successful.</returns>
-    /// <exception cref="InvalidOperationException"> when <see cref="Result.IsFailure"/> is true.</exception>
-    public TValue Value => IsSuccess
+    [NotNull]
+    public T Value => IsSuccess
         ? _value!
-        : throw new InvalidOperationException("The value of a failure result can not be accessed.");
+        : throw new InvalidOperationException("The value of a failure result can not be accessed");
 
-    public static implicit operator Result<TValue>(TValue? value) => Create(value);
+    public static implicit operator Result<T>(T? value) => Create(value);
 }
-

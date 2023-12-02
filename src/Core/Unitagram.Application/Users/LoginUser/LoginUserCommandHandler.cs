@@ -22,8 +22,9 @@ public class LoginUserCommandHandler : ICommandHandler<LoginUserCommand, AccessT
             request.Password,
             cancellationToken);
 
-        if (result.IsFailure) {
-            // return Result.Failure<AccessTokenResponse>(UserErrors.InvalidCredentials);
+        if (result.IsFailure) 
+        {
+            return Result.Failure<AccessTokenResponse>(UserErrors.InvalidCredentials);
         }
 
         return new AccessTokenResponse(result.Value.AccessToken, result.Value.RefreshToken);

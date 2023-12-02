@@ -447,6 +447,15 @@ namespace Unitagram.Infrastructure.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Account login information is invalid..
+        /// </summary>
+        internal static string User_InvalidCredentials {
+            get {
+                return ResourceManager.GetString("User.InvalidCredentials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Username already exists..
         /// </summary>
         internal static string UsernameExists {

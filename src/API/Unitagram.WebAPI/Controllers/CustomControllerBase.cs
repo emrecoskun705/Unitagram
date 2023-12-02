@@ -7,6 +7,6 @@ namespace Unitagram.WebAPI.Controllers;
 /// </summary>
 [Route("api/v{version:apiVersion}/[controller]")]
 [ApiController]
-public class CustomControllerBase : ControllerBase
+public abstract class CustomControllerBase : ControllerBase
 {
 }

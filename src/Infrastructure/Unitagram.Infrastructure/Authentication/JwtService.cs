@@ -1,15 +1,10 @@
-﻿using System.Globalization;
-using System.IdentityModel.Tokens.Jwt;
-using System.Net.Http.Json;
-using System.Security.Claims;
-using System.Text;
+﻿using System.Net.Http.Json;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 using Unitagram.Application.Contracts.Authentication;
 using Unitagram.Application.Models;
 using Unitagram.Domain.Shared;
 using Unitagram.Infrastructure.Authentication.Models;
-using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames;
 
 namespace Unitagram.Infrastructure.Authentication;
 
@@ -21,10 +16,12 @@ internal sealed class JwtService : IAccessTokenService
     
     private readonly HttpClient _httpClient;
     private readonly KeycloakOptions _keycloakOptions;
+    private readonly ILogger<JwtService> _logger;
 
-    public JwtService(HttpClient httpClient, IOptions<KeycloakOptions> keycloakOptions)
+    public JwtService(HttpClient httpClient, IOptions<KeycloakOptions> keycloakOptions, ILogger<JwtService> logger)
     {
         _httpClient = httpClient;
+        _logger = logger;
         _keycloakOptions = keycloakOptions.Value;
     }
     
@@ -52,6 +49,8 @@ internal sealed class JwtService : IAccessTokenService
 
             if (authorizationToken is null)
             {
+                _logger.LogCritical("KeyCloak authorization token error; Class: {0}; Method: {1}",
+                    nameof(JwtService), nameof(CreateAccessToken));
                 return Result.Failure<AccessTokenResponse>(AuthenticationFailed);
             }
 

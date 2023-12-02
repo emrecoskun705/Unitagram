@@ -1,8 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Unitagram.Application.Contracts.Common;
 using Unitagram.Application.Users.LoginUser;
 using Unitagram.Application.Users.RegisterUser;
+using Unitagram.Domain.Shared;
 
 namespace Unitagram.WebAPI.Controllers.v1.Accounts;
 
@@ -15,14 +17,17 @@ namespace Unitagram.WebAPI.Controllers.v1.Accounts;
 public class AccountController : CustomControllerBase
 {
     private readonly ISender _sender;
+    private readonly ILocalizationService _localizationService;
     
     /// <summary>
-    /// Initializes a new instance of the <see cref="AccountController"/> class.
+    /// 
     /// </summary>
-    /// <param name="sender">The MediatR sender for handling commands.</param>
-    public AccountController(ISender sender)
+    /// <param name="sender"></param>
+    /// <param name="localizationService"></param>
+    public AccountController(ISender sender, ILocalizationService localizationService)
     {
         _sender = sender;
+        _localizationService = localizationService;
     }
     
     /// <summary>
@@ -32,7 +37,7 @@ public class AccountController : CustomControllerBase
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>Returns an IActionResult representing the result of the registration operation.</returns>
     [HttpPost("register")]
-    public async Task<IActionResult> Register(
+    public async Task<ActionResult<Guid>> Register(
         RegisterUserRequest request,
         CancellationToken cancellationToken)
     {
@@ -44,12 +49,7 @@ public class AccountController : CustomControllerBase
 
         var result = await _sender.Send(command, cancellationToken);
 
-        if (result.IsFailure)
-        {
-            return BadRequest(result.Error);
-        }
-
-        return Ok(result.Value);
+        return result.ToOk(_localizationService);
     }
     
     /// <summary>
@@ -59,21 +59,15 @@ public class AccountController : CustomControllerBase
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     [HttpPost("login")]
-    public async Task<IActionResult> Login(
+    public async Task<ActionResult<AccessTokenResponse>> Login(
         LoginUserRequest request,
         CancellationToken cancellationToken)
     {
         var command = new LoginUserCommand(request.Email, request.Password);
 
         var result = await _sender.Send(command, cancellationToken);
-
-        if (result.IsFailure)
-        {
-            return Unauthorized(result.Error);
-        }
-
-        return Ok(result.Value);
+        
+        return result.ToOk(_localizationService);
     }
-
     
 }

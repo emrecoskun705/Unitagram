@@ -161,4 +161,7 @@
     <data name="UserNotFound" xml:space="preserve">
         <value>Kullanıcı bulunamadı.</value>
     </data>
+    <data name="User.InvalidCredentials" xml:space="preserve">
+        <value>Hesap giriş bilgileri geçersiz.</value>
+    </data>
 </root>
