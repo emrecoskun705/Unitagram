@@ -88,7 +88,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseMiddleware<ExceptionMiddleware>();
 
-app.UseSerilogRequestLogging();
+// app.UseSerilogRequestLogging();
 
 // Configure the HTTP request pipeline.
 if (builder.Environment.IsProduction())
