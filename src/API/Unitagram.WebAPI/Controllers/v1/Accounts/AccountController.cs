@@ -2,9 +2,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Unitagram.Application.Contracts.Common;
+using Unitagram.Application.Models;
 using Unitagram.Application.Users.LoginUser;
+using Unitagram.Application.Users.RefreshToken;
 using Unitagram.Application.Users.RegisterUser;
-using Unitagram.Domain.Shared;
 
 namespace Unitagram.WebAPI.Controllers.v1.Accounts;
 
@@ -69,5 +70,18 @@ public class AccountController : CustomControllerBase
         
         return result.ToOk(_localizationService);
     }
+    
+    [HttpPost("refresh")]
+    public async Task<ActionResult<AccessTokenResponse>> Refresh(
+        RefreshTokenRequest request,
+        CancellationToken cancellationToken)
+    {
+        var command = new RefreshTokenCommand(request.Token);
+
+        var result = await _sender.Send(command, cancellationToken);
+        
+        return result.ToOk(_localizationService);
+    }
+
     
 }

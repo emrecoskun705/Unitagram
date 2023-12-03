@@ -12,7 +12,7 @@ using Unitagram.Persistence.Data;
 namespace Unitagram.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231126171506_Initial")]
+    [Migration("20231203151431_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

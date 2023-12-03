@@ -53,7 +53,12 @@ public static class DependencyInjection
 
             var opt = sp.GetRequiredService<IOptions<KeycloakOptions>>().Value;
             client.BaseAddress = new Uri(opt.TokenUrl);
+        });
+        
+        services.AddHttpClient<IRefreshTokenService, RefreshTokenService>((sp, client) => {
 
+            var opt = sp.GetRequiredService<IOptions<KeycloakOptions>>().Value;
+            client.BaseAddress = new Uri(opt.TokenUrl);
         });
         
         services.AddAuthorization();

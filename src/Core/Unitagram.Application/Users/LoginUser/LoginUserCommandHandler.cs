@@ -1,5 +1,6 @@
 ﻿using Unitagram.Application.Contracts.Authentication;
 using Unitagram.Application.Contracts.Messaging;
+using Unitagram.Application.Models;
 using Unitagram.Domain.Shared;
 using Unitagram.Domain.Users;
 
