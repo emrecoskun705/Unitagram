@@ -1,7 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Dapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Unitagram.Application.Contracts.Data;
 using Unitagram.Domain.Common;
 using Unitagram.Domain.Users;
 using Unitagram.Persistence.Data;
@@ -27,6 +29,10 @@ public static class DependencyInjection
             
             options.UseNpgsql(connectionString);
         });
+
+        #region Dapper
+        services.AddSingleton<ISqlConnectionFactory>(_ => new SqlConnectionFactory(connectionString));
+        #endregion
         
         services.AddScoped<IUserRepository, UserRepository>();
         
