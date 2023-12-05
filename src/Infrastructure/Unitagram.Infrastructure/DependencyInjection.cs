@@ -61,6 +61,12 @@ public static class DependencyInjection
             client.BaseAddress = new Uri(opt.TokenUrl);
         });
         
+        services.AddHttpClient<ILogoutUserService, LogoutUserService>((sp, client) => {
+
+            var opt = sp.GetRequiredService<IOptions<KeycloakOptions>>().Value;
+            client.BaseAddress = new Uri(opt.UserLogoutUrl);
+        });
+        
         services.AddAuthorization();
         IdentityModelEventSource.ShowPII = true;
     }
