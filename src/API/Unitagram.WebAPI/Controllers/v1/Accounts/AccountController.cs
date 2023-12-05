@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Unitagram.Application.Contracts.Common;
 using Unitagram.Application.Models;
 using Unitagram.Application.Users.LoginUser;
+using Unitagram.Application.Users.LogoutUser;
 using Unitagram.Application.Users.RefreshToken;
 using Unitagram.Application.Users.RegisterUser;
 
@@ -77,6 +78,18 @@ public class AccountController : CustomControllerBase
         CancellationToken cancellationToken)
     {
         var command = new RefreshTokenCommand(request.Token);
+
+        var result = await _sender.Send(command, cancellationToken);
+        
+        return result.ToOk(_localizationService);
+    }
+
+    [HttpPost("logout")]
+    public async Task<ActionResult<bool>> Logout(
+        LogoutUserRequest request,
+        CancellationToken cancellationToken)
+    {
+        var command = new LogoutUserCommand(request.RefreshToken);
 
         var result = await _sender.Send(command, cancellationToken);
         

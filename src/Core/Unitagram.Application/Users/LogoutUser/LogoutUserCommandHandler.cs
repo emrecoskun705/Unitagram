@@ -20,7 +20,7 @@ public class LogoutUserCommandHandler : ICommandHandler<LogoutUserCommand, bool>
             request.RefreshToken,
             cancellationToken);
         
-        if (result) 
+        if (!result) 
         {
             return Result.Failure<bool>(UserErrors.InvalidCredentials);
         }
