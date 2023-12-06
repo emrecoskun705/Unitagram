@@ -72,6 +72,12 @@ public class AccountController : CustomControllerBase
         return result.ToOk(_localizationService);
     }
     
+    /// <summary>
+    /// Refreshes the access token using the provided refresh token.
+    /// </summary>
+    /// <param name="request">The refresh token request.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>Returns the result of the access token refresh operation.</returns>
     [HttpPost("refresh")]
     public async Task<ActionResult<AccessTokenResponse>> Refresh(
         RefreshTokenRequest request,
@@ -84,16 +90,25 @@ public class AccountController : CustomControllerBase
         return result.ToOk(_localizationService);
     }
 
+    /// <summary>
+    /// Logs out the user based on the provided refresh token.
+    /// </summary>
+    /// <param name="request">The logout user request.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>Returns IActionResult representing the result of the logout operation.</returns>
     [HttpPost("logout")]
-    public async Task<ActionResult<bool>> Logout(
+    public async Task<IActionResult> Logout(
         LogoutUserRequest request,
         CancellationToken cancellationToken)
     {
         var command = new LogoutUserCommand(request.RefreshToken);
 
         var result = await _sender.Send(command, cancellationToken);
+
+        if (result.IsFailure)
+            return BadRequest();
         
-        return result.ToOk(_localizationService);
+        return NoContent();
     }
 
     
