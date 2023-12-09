@@ -32,6 +32,7 @@ builder.Services.AddControllers(options =>
         .RequireAuthenticatedUser()
         .AddAuthenticationSchemes(JwtBearerDefaults
             .AuthenticationScheme) // If you do not add AuthenticationScheme you will get an error for invalid JWT tokens
+        .RequireClaim("email_verified", "true")
         .Build();
     options.Filters.Add(new AuthorizeFilter(policy));
 });
@@ -51,8 +52,7 @@ if (builder.Environment.IsDevelopment() || builder.Environment.IsProduction())
     builder.Services.AddEndpointsApiExplorer(); // generates description for all endpoints
     builder.Services.AddSwaggerGen(options =>
     {
-        var asd = AppContext.BaseDirectory;
-        options.IncludeXmlComments(Path.Combine(asd, "api.xml"));
+        options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "api.xml"));
 
         options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo()
         {
@@ -65,7 +65,6 @@ if (builder.Environment.IsDevelopment() || builder.Environment.IsProduction())
             Title = "UnitagramV2",
             Version = "2.0"
         });
-
     }); // generates Open API specification
 }
 
@@ -99,15 +98,10 @@ if (builder.Environment.IsProduction())
 
 if (builder.Environment.IsDevelopment())
 {
-    // app.UseDeveloperExceptionPage();
-}
-
-if (builder.Environment.IsDevelopment())
-{
     app.UseSwagger(); // creates endpoints for swagger.json
     app.UseSwaggerUI(options =>
     {
-        string swaggerJsonBasePath = string.IsNullOrWhiteSpace(options.RoutePrefix) ? "." : "..";
+        // string swaggerJsonBasePath = string.IsNullOrWhiteSpace(options.RoutePrefix) ? "." : "..";
         options.SwaggerEndpoint($"/swagger/v1/swagger.json", "1.0");
         options.SwaggerEndpoint($"/swagger/v2/swagger.json", "2.0");
     });
@@ -139,6 +133,4 @@ app.Run();
 /// <summary>
 /// make the auto-generated Program accessible programmatically
 /// </summary>
-public partial class Program
-{
-}
+public partial class Program;

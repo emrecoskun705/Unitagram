@@ -1,13 +1,10 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Logging;
-using Microsoft.IdentityModel.Tokens;
 using Unitagram.Application.Contracts.Authentication;
 using Unitagram.Application.Contracts.Common;
-using Unitagram.Application.Models;
 using Unitagram.Infrastructure.Authentication;
 using Unitagram.Infrastructure.Localization;
 
@@ -29,24 +26,24 @@ public static class DependencyInjection
     {
         // Add JWT
         services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer();
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+        .AddJwtBearer();
         
         services.Configure<AuthenticationOptions>(configuration.GetSection("Authentication"));
         services.ConfigureOptions<JwtBearerOptionsSetup>();
         services.Configure<KeycloakOptions>(configuration.GetSection("Keycloak"));
         
         services.AddTransient<AdminAuthorizationDelegatingHandler>();
+        
+        #region HttpClients 
         services.AddHttpClient<ICreateUserService, CreateUserService>((sp, client) =>
         {
-
             var opt = sp.GetRequiredService<IOptions<KeycloakOptions>>().Value;
             client.BaseAddress = new Uri(opt.AdminUrl);
-
-
         }).AddHttpMessageHandler<AdminAuthorizationDelegatingHandler>();
         
         services.AddHttpClient<IAccessTokenService, JwtService>((sp, client) => {
@@ -66,6 +63,7 @@ public static class DependencyInjection
             var opt = sp.GetRequiredService<IOptions<KeycloakOptions>>().Value;
             client.BaseAddress = new Uri(opt.UserLogoutUrl);
         });
+        #endregion
         
         services.AddAuthorization();
         IdentityModelEventSource.ShowPII = true;
