@@ -6,7 +6,7 @@ using Unitagram.Domain.Users;
 
 namespace Unitagram.Application.Users.RefreshToken;
 
-public class RefreshTokenCommandHandler : ICommandHandler<RefreshTokenCommand, AccessTokenResponse>
+public class RefreshTokenCommandHandler : ICommandHandler<RefreshTokenCommand, RefreshTokenResponse>
 {
     private readonly IRefreshTokenService _refreshTokenService;
 
@@ -15,7 +15,7 @@ public class RefreshTokenCommandHandler : ICommandHandler<RefreshTokenCommand, A
         _refreshTokenService = refreshTokenService;
     }
 
-    public async Task<Result<AccessTokenResponse>> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
+    public async Task<Result<RefreshTokenResponse>> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
     {
         var result = await _refreshTokenService.RefreshToken(
             request.Token,
@@ -23,9 +23,9 @@ public class RefreshTokenCommandHandler : ICommandHandler<RefreshTokenCommand, A
 
         if (result.IsFailure) 
         {
-            return Result.Failure<AccessTokenResponse>(UserErrors.InvalidCredentials);
+            return Result.Failure<RefreshTokenResponse>(UserErrors.InvalidCredentials);
         }
 
-        return new AccessTokenResponse(result.Value.AccessToken, result.Value.RefreshToken);
+        return new RefreshTokenResponse(result.Value.AccessToken);
     }
 }

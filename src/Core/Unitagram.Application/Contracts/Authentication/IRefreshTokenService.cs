@@ -5,5 +5,5 @@ namespace Unitagram.Application.Contracts.Authentication;
 
 public interface IRefreshTokenService
 {
-    Task<Result<AccessTokenResponse>> RefreshToken(string token, CancellationToken cancellationToken = default);
+    Task<Result<RefreshTokenResponse>> RefreshToken(string token, CancellationToken cancellationToken = default);
 }

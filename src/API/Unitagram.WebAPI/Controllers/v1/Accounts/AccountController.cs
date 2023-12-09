@@ -79,7 +79,7 @@ public class AccountController : CustomControllerBase
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>Returns the result of the access token refresh operation.</returns>
     [HttpPost("refresh")]
-    public async Task<ActionResult<AccessTokenResponse>> Refresh(
+    public async Task<ActionResult<RefreshTokenResponse>> Refresh(
         RefreshTokenRequest request,
         CancellationToken cancellationToken)
     {

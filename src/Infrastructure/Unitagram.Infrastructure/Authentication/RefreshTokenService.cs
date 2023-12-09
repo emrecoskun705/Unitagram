@@ -25,7 +25,7 @@ internal sealed class RefreshTokenService : IRefreshTokenService
         _keycloakOptions = keycloakOptions.Value;
     }
 
-    public async Task<Result<AccessTokenResponse>> RefreshToken(string token, CancellationToken cancellationToken = default)
+    public async Task<Result<RefreshTokenResponse>> RefreshToken(string token, CancellationToken cancellationToken = default)
     {
         try
         {
@@ -50,14 +50,14 @@ internal sealed class RefreshTokenService : IRefreshTokenService
             {
                 _logger.LogCritical("KeyCloak authorization token error; Class: {0}; Method: {1}",
                     nameof(JwtService), nameof(RefreshToken));
-                return Result.Failure<AccessTokenResponse>(RefreshTokenFailed);
+                return Result.Failure<RefreshTokenResponse>(RefreshTokenFailed);
             }
 
-            return new AccessTokenResponse(authorizationToken.AccessToken, authorizationToken.RefreshToken);
+            return new RefreshTokenResponse(authorizationToken.AccessToken);
         }
         catch (HttpRequestException)
         {
-            return Result.Failure<AccessTokenResponse>(RefreshTokenFailed);
+            return Result.Failure<RefreshTokenResponse>(RefreshTokenFailed);
         }
     }
 }
