@@ -18,6 +18,7 @@ internal sealed class JwtBearerOptionsSetup : IConfigureNamedOptions<JwtBearerOp
         options.MetadataAddress = _authenticationOptions.MetadataUrl;
         options.RequireHttpsMetadata = _authenticationOptions.RequireHttpsMetadata;
         options.TokenValidationParameters.ValidIssuer = _authenticationOptions.Issuer;
+        options.TokenValidationParameters.ClockSkew = TimeSpan.FromMinutes(1);
     }
 
     public void Configure(string? name, JwtBearerOptions options)
