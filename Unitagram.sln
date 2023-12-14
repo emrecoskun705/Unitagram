@@ -13,21 +13,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{FF7987F4-1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{9A6E9EB7-918B-4824-9789-307E1C608DCD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unitagram.Application", "src\Core\Unitagram.Application\Unitagram.Application.csproj", "{09F167AF-6AB7-49B4-9B67-8B9A761CDDB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unitagram.Application", "main\src\Core\Unitagram.Application\Unitagram.Application.csproj", "{09F167AF-6AB7-49B4-9B67-8B9A761CDDB9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unitagram.Domain", "src\Core\Unitagram.Domain\Unitagram.Domain.csproj", "{7E6FE8F0-6F71-4BD7-AA0D-EDFE87C6A9D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unitagram.Domain", "main\src\Core\Unitagram.Domain\Unitagram.Domain.csproj", "{7E6FE8F0-6F71-4BD7-AA0D-EDFE87C6A9D6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unitagram.Infrastructure", "src\Infrastructure\Unitagram.Infrastructure\Unitagram.Infrastructure.csproj", "{45A20C2F-0B86-4D2D-915B-98C9F6EECCE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unitagram.Infrastructure", "main\src\Infrastructure\Unitagram.Infrastructure\Unitagram.Infrastructure.csproj", "{45A20C2F-0B86-4D2D-915B-98C9F6EECCE7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unitagram.Persistence", "src\Infrastructure\Unitagram.Persistence\Unitagram.Persistence.csproj", "{294F6D01-BD88-4802-B5EB-4A57A4486C1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unitagram.Persistence", "main\src\Infrastructure\Unitagram.Persistence\Unitagram.Persistence.csproj", "{294F6D01-BD88-4802-B5EB-4A57A4486C1A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unitagram.Architecture.Tests", "tests\Unitagram.Architecture.Tests\Unitagram.Architecture.Tests.csproj", "{A6EEEE74-E868-43A1-9D4F-2717330FD000}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unitagram.Architecture.Tests", "main\tests\Unitagram.Architecture.Tests\Unitagram.Architecture.Tests.csproj", "{A6EEEE74-E868-43A1-9D4F-2717330FD000}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6D7776C0-70DF-4CDE-90BF-8A046C98B800}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unitagram.WebAPI", "src\API\Unitagram.WebAPI\Unitagram.WebAPI.csproj", "{8B0D9D86-75C4-4B01-8845-2FDCF0A8DE56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unitagram.WebAPI", "main\src\API\Unitagram.WebAPI\Unitagram.WebAPI.csproj", "{8B0D9D86-75C4-4B01-8845-2FDCF0A8DE56}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{B37B548A-C348-4276-8D18-57EED9076CF5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "main", "main", "{E138E727-4926-47B5-B9D7-441BE9811986}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,6 +79,8 @@ Global
 		{294F6D01-BD88-4802-B5EB-4A57A4486C1A} = {9A6E9EB7-918B-4824-9789-307E1C608DCD}
 		{A6EEEE74-E868-43A1-9D4F-2717330FD000} = {78BD1D06-AF90-4A69-BF1E-C22010350FA5}
 		{8B0D9D86-75C4-4B01-8845-2FDCF0A8DE56} = {FFD92FC8-0ED1-49D0-8B5A-45854577B072}
+		{05FFAB92-45A3-4515-82DF-3EBE1AF09E72} = {E138E727-4926-47B5-B9D7-441BE9811986}
+		{78BD1D06-AF90-4A69-BF1E-C22010350FA5} = {E138E727-4926-47B5-B9D7-441BE9811986}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D2B0DAB0-A561-41F9-BC22-974C0C878DAE}

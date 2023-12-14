@@ -5,7 +5,7 @@ services:
     image: ${DOCKER_REGISTRY-}unitagramwebapi
     build:
       context: .
-      dockerfile: src/API/Unitagram.WebAPI/Dockerfile
+      dockerfile: main/src/API/Unitagram.WebAPI/Dockerfile
       
   unitagram.db:
     image: postgres
