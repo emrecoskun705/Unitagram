@@ -17,7 +17,8 @@ internal class RoleConfiguration : IEntityTypeConfiguration<Role>
             .HasMaxLength(20);
         
         builder.HasIndex(x => x.NormalizedName)
-            .HasDatabaseName("IX_Role_NormalizedName");
+            .HasDatabaseName("IX_Role_NormalizedName")
+            .IsUnique();
         
         builder.HasData(
             new Role()
