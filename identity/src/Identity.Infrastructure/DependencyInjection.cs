@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Identity.Application.Abstractions.Clock;
+using Identity.Infrastructure.Clock;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,6 +12,8 @@ public static class DependencyInjection
         IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("Default") ?? throw new ArgumentNullException($"connectionString");
+
+        services.AddTransient<IDateTimeProvider, DateTimeProvider>();
         
         services.AddDbContext<ApplicationDbContext>(options =>
         {

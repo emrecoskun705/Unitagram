@@ -33,12 +33,31 @@ namespace Identity.Infrastructure.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("character varying(20)");
 
+                    b.Property<string>("NormalizedName")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("Name")
-                        .HasDatabaseName("IX_Role_Name");
+                    b.HasIndex("NormalizedName")
+                        .HasDatabaseName("IX_Role_NormalizedName");
 
                     b.ToTable("Role");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("8426249a-a917-45e8-b8bb-43a551a884ed"),
+                            Name = "DefaultUser",
+                            NormalizedName = "DEFAULTUSER"
+                        },
+                        new
+                        {
+                            Id = new Guid("cd7eb224-b08c-46ca-876a-5bb99ef4ad13"),
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        });
                 });
 
             modelBuilder.Entity("Identity.Domain.User", b =>
@@ -54,7 +73,6 @@ namespace Identity.Infrastructure.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("character varying(300)");
 
@@ -62,7 +80,6 @@ namespace Identity.Infrastructure.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("NormalizedEmail")
-                        .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("character varying(300)");
 
@@ -71,7 +88,7 @@ namespace Identity.Infrastructure.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("character varying(30)");
 
-                    b.Property<DateTimeOffset>("UpdatedDateTime")
+                    b.Property<DateTimeOffset?>("UpdatedDateTime")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Username")
@@ -85,6 +102,7 @@ namespace Identity.Infrastructure.Migrations
                         .HasDatabaseName("IX_User_NormalizedEmail");
 
                     b.HasIndex("NormalizedUsername")
+                        .IsUnique()
                         .HasDatabaseName("IX_User_NormalizedUsername");
 
                     b.ToTable("User");

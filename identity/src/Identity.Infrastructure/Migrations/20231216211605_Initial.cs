@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace Identity.Infrastructure.Migrations
 {
     /// <inheritdoc />
@@ -16,7 +18,8 @@ namespace Identity.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false)
+                    Name = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
+                    NormalizedName = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -28,14 +31,14 @@ namespace Identity.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Email = table.Column<string>(type: "character varying(300)", maxLength: 300, nullable: false),
-                    NormalizedEmail = table.Column<string>(type: "character varying(300)", maxLength: 300, nullable: false),
+                    Email = table.Column<string>(type: "character varying(300)", maxLength: 300, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "character varying(300)", maxLength: 300, nullable: true),
                     EmailVerified = table.Column<bool>(type: "boolean", nullable: false),
                     Active = table.Column<bool>(type: "boolean", nullable: false),
                     Username = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
                     NormalizedUsername = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
                     CreatedDateTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    UpdatedDateTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
+                    UpdatedDateTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -66,10 +69,19 @@ namespace Identity.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Role_Name",
+            migrationBuilder.InsertData(
                 table: "Role",
-                column: "Name");
+                columns: new[] { "Id", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { new Guid("8426249a-a917-45e8-b8bb-43a551a884ed"), "DefaultUser", "DEFAULTUSER" },
+                    { new Guid("cd7eb224-b08c-46ca-876a-5bb99ef4ad13"), "Administrator", "ADMINISTRATOR" }
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Role_NormalizedName",
+                table: "Role",
+                column: "NormalizedName");
 
             migrationBuilder.CreateIndex(
                 name: "IX_User_NormalizedEmail",
@@ -79,7 +91,8 @@ namespace Identity.Infrastructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_User_NormalizedUsername",
                 table: "User",
-                column: "NormalizedUsername");
+                column: "NormalizedUsername",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserRole_RoleId",
