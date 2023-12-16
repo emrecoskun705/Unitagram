@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Identity.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231216211605_Initial")]
+    [Migration("20231216214102_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -44,6 +44,7 @@ namespace Identity.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
+                        .IsUnique()
                         .HasDatabaseName("IX_Role_NormalizedName");
 
                     b.ToTable("Role");

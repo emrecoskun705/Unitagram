@@ -41,6 +41,7 @@ namespace Identity.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
+                        .IsUnique()
                         .HasDatabaseName("IX_Role_NormalizedName");
 
                     b.ToTable("Role");

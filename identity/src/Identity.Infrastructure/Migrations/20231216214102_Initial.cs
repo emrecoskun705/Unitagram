@@ -81,7 +81,8 @@ namespace Identity.Infrastructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Role_NormalizedName",
                 table: "Role",
-                column: "NormalizedName");
+                column: "NormalizedName",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_User_NormalizedEmail",
