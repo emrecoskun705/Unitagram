@@ -5,45 +5,48 @@ using System.Text;
 using Identity.Application.Abstractions.Clock;
 using Identity.Application.Abstractions.Jwt;
 using Identity.Application.Abstractions.Jwt.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Identity.Infrastructure.Jwt;
 
-internal class JwtService(IOptions<JwtOptions> jwtOptions, IDateTimeProvider dateTimeProvider) : IJwtService
+internal class AccessTokenService(IOptions<AccessTokenOptions> accessTokenOptions, IDateTimeProvider dateTimeProvider) : IAccessTokenService
 {
-    private readonly JwtOptions _jwtOptions = jwtOptions.Value;
+    private readonly AccessTokenOptions _accessTokenOptions = accessTokenOptions.Value;
 
-    public JwtResponse GenerateJwt(JwtRequest request)
+    public AccessTokenResponse GenerateAccessToken(AccessTokenRequest request)
     {
-        DateTime expiration = DateTime.UtcNow.AddMinutes(Convert.ToDouble(_jwtOptions.ExpirationMinutes));
+        var expiration = DateTime.UtcNow.AddMinutes(Convert.ToDouble(_accessTokenOptions.ExpirationMinutes));
         
         var claims = new[] {
             new Claim(JwtRegisteredClaimNames.Sub, request.User.Username), //Subject (user id)
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()), //JWT unique ID
             new Claim(JwtRegisteredClaimNames.Sid, request.SessionId), // User's session ID
+            new Claim(JwtRegisteredClaimNames.Typ, JwtBearerDefaults.AuthenticationScheme),
             new Claim(JwtRegisteredClaimNames.Iat,
                 dateTimeProvider.UtcNow.ToString(CultureInfo.InvariantCulture)), //Issued at (date and time of token generation)
             new Claim(JwtRegisteredClaimNames.Email, request.User.Email??""),
             new Claim(JwtCustomClaimNames.EmailVerified, request.User.EmailVerified.ToString().ToLower()),
             new Claim(JwtCustomClaimNames.UserEnabled, request.User.Active.ToString().ToLower()),
+            new Claim(JwtCustomClaimNames.Roles,  Newtonsoft.Json.JsonConvert.SerializeObject(request.User.UserRoles))
         };
         
-        var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtOptions.Key));
+        var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_accessTokenOptions.Key));
         
         var signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
         
-        JwtSecurityToken tokenGenerator = new JwtSecurityToken(
-           _jwtOptions.Issuer,
-            _jwtOptions.Audience,
+        var tokenGenerator = new JwtSecurityToken(
+           _accessTokenOptions.Issuer,
+            _accessTokenOptions.Audience,
             claims,
             expires: expiration,
             signingCredentials: signingCredentials
         );
         
-        JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
-        string token = tokenHandler.WriteToken(tokenGenerator);
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var token = tokenHandler.WriteToken(tokenGenerator);
 
-        return new JwtResponse(token);
+        return new AccessTokenResponse(token);
     }
 }

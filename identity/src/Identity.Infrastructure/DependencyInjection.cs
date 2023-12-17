@@ -3,6 +3,7 @@ using Identity.Application.Abstractions.Data;
 using Identity.Application.Abstractions.Jwt;
 using Identity.Infrastructure.Clock;
 using Identity.Infrastructure.Data;
+using Identity.Infrastructure.Jwt;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,7 +17,8 @@ public static class DependencyInjection
     {
         var connectionString = configuration.GetConnectionString("Default") ?? throw new ArgumentNullException($"connectionString");
 
-        services.Configure<JwtOptions>(configuration.GetSection(nameof(JwtOptions)));
+        services.Configure<AccessTokenOptions>(configuration.GetSection(nameof(AccessTokenOptions)));
+        services.Configure<RefreshTokenOptions>(configuration.GetSection(nameof(RefreshTokenOptions)));
         
         services.AddTransient<IDateTimeProvider, DateTimeProvider>();
         
@@ -28,6 +30,8 @@ public static class DependencyInjection
         #region Dapper
         services.AddSingleton<ISqlConnectionFactory>(_ => new SqlConnectionFactory(connectionString));
         #endregion
+
+        services.AddTransient<IAccessTokenService, AccessTokenService>();
 
         return services;
     }

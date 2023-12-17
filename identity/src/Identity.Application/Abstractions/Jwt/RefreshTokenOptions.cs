@@ -1,9 +1,9 @@
-namespace Identity.Application.Abstractions.Jwt;
+﻿namespace Identity.Application.Abstractions.Jwt;
 
-public record JwtOptions
+public record RefreshTokenOptions
 {
     public string Key { get; init; } = null!;
     public string Issuer { get; init; } = null!;
     public string Audience { get; init; } = null!;
-    public int ExpirationMinutes { get; init; }
+    public int ExpirationDays { get; init; }
 }
