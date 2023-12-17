@@ -1,5 +1,6 @@
 ﻿using Identity.Application.Abstractions.Clock;
 using Identity.Application.Abstractions.Data;
+using Identity.Application.Abstractions.Jwt;
 using Identity.Infrastructure.Clock;
 using Identity.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,8 @@ public static class DependencyInjection
     {
         var connectionString = configuration.GetConnectionString("Default") ?? throw new ArgumentNullException($"connectionString");
 
+        services.Configure<JwtOptions>(configuration.GetSection(nameof(JwtOptions)));
+        
         services.AddTransient<IDateTimeProvider, DateTimeProvider>();
         
         services.AddDbContext<ApplicationDbContext>(options =>
