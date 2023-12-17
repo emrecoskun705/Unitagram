@@ -1,5 +1,7 @@
 ﻿using Identity.Application.Abstractions.Clock;
+using Identity.Application.Abstractions.Data;
 using Identity.Infrastructure.Clock;
+using Identity.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +21,10 @@ public static class DependencyInjection
         {
             options.UseNpgsql(connectionString);
         });
+        
+        #region Dapper
+        services.AddSingleton<ISqlConnectionFactory>(_ => new SqlConnectionFactory(connectionString));
+        #endregion
 
         return services;
     }
