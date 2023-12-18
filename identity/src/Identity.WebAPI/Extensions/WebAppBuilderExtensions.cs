@@ -12,6 +12,8 @@ public static class WebAppBuilderExtensions
 
         builder.Services.AddInfrastructureServices(builder.Configuration);
 
+        builder.Services.AddMemoryCache();
+        
         #endregion Project Dependencies
         
         return builder;
