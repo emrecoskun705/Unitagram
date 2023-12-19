@@ -23,7 +23,7 @@ public class User : BaseEntity<UserId>
     public static User Create(FirstName firstName, LastName lastName, Email email, UserName userName)
     {
         var user = new User(UserId.New(), firstName, lastName, email, userName);
-        user.RemoveDomainEvent(new UserCreatedDomainEvent(user.Id));
+        user.AddDomainEvent(new UserCreatedDomainEvent(user.Id));
         return user;
     }
     

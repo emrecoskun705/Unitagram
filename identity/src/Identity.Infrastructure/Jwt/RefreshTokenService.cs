@@ -20,7 +20,7 @@ internal class RefreshTokenService(IOptions<RefreshTokenOptions> refreshTokenOpt
 
         var claims = new[]
         {
-            new Claim(JwtRegisteredClaimNames.Sub, request.User.Username), //Subject (user id)
+            new Claim(JwtRegisteredClaimNames.Sub, request.User.Username.Value), //Subject (user id)
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()), //JWT unique ID
             new Claim(JwtRegisteredClaimNames.Sid, request.SessionId), // User's session ID
             new Claim(JwtRegisteredClaimNames.Typ, "Refresh"),

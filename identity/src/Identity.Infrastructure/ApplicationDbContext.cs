@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Identity.Domain;
+using Identity.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 
 namespace Identity.Infrastructure;

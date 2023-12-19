@@ -20,13 +20,13 @@ internal class AccessTokenService(IOptions<AccessTokenOptions> accessTokenOption
         var expiration = DateTime.UtcNow.AddMinutes(Convert.ToDouble(_accessTokenOptions.ExpirationMinutes));
         
         var claims = new[] {
-            new Claim(JwtRegisteredClaimNames.Sub, request.User.Username), //Subject (user id)
+            new Claim(JwtRegisteredClaimNames.Sub, request.User.Username.Value), //Subject (user id)
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()), //JWT unique ID
             new Claim(JwtRegisteredClaimNames.Sid, request.SessionId), // User's session ID
             new Claim(JwtRegisteredClaimNames.Typ, JwtBearerDefaults.AuthenticationScheme),
             new Claim(JwtRegisteredClaimNames.Iat,
                 dateTimeProvider.UtcNow.ToString(CultureInfo.InvariantCulture)), //Issued at (date and time of token generation)
-            new Claim(JwtRegisteredClaimNames.Email, request.User.Email??""),
+            new Claim(JwtRegisteredClaimNames.Email, request.User.Email?.Value??""),
             new Claim(JwtCustomClaimNames.EmailVerified, request.User.EmailVerified.ToString().ToLower()),
             new Claim(JwtCustomClaimNames.UserEnabled, request.User.Active.ToString().ToLower()),
             new Claim(JwtCustomClaimNames.Roles,  Newtonsoft.Json.JsonConvert.SerializeObject(request.User.UserRoles))

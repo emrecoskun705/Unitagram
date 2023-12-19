@@ -25,10 +25,16 @@ public class Error : IEquatable<Error>
     /// </summary>
     /// <param name="code">The error code.</param>
     /// <param name="message">The error message.</param>
-    public Error(string code, string message)
+    public Error(string code, string? message)
     {
         Code = code;
         Message = message;
+    }
+    
+    public Error(string code)
+    {
+        Code = code;
+        Message = null;
     }
 
     /// <summary>
@@ -39,7 +45,7 @@ public class Error : IEquatable<Error>
     /// <summary>
     /// Gets the error message.
     /// </summary>
-    public string Message { get; }
+    public string? Message { get; }
 
     public static implicit operator string(Error error) => error.Code;
 

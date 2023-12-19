@@ -1,4 +1,6 @@
-﻿namespace Identity.Domain;
+﻿using Identity.Domain.Users;
+
+namespace Identity.Domain;
 
 public class UserRole
 {
