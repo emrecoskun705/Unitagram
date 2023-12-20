@@ -1,4 +1,5 @@
-﻿using Identity.Domain;
+﻿using Identity.Domain.Roles;
+using Identity.Domain.Roles.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -9,29 +10,41 @@ internal class RoleConfiguration : IEntityTypeConfiguration<Role>
     public void Configure(EntityTypeBuilder<Role> builder)
     {
         builder.HasKey(x => x.Id);
-        
+        builder.Property(x => x.Id).HasConversion(
+            c => c.Value,
+            val => new RoleId(val)
+        );
+
         builder.Property(x => x.Name)
-            .HasMaxLength(20);
-        
+            .HasMaxLength(20)
+            .HasConversion(
+                c => c.Value,
+                val => new Name(val)
+            );
+
         builder.Property(x => x.NormalizedName)
-            .HasMaxLength(20);
-        
+            .HasMaxLength(20)
+            .HasConversion(
+                c => c.Value,
+                val => NormalizedName.Create(val)
+            );
+
         builder.HasIndex(x => x.NormalizedName)
             .HasDatabaseName("IX_Role_NormalizedName")
             .IsUnique();
-        
+
         builder.HasData(
             new Role()
             {
-                Id = Guid.Parse("8426249A-A917-45E8-B8BB-43A551A884ED"),
-                Name = "DefaultUser",
-                NormalizedName = "DEFAULTUSER"
+                Id = new RoleId(Guid.Parse("8426249A-A917-45E8-B8BB-43A551A884ED")),
+                Name = new Name("DefaultUser"),
+                NormalizedName = NormalizedName.Create("DEFAULTUSER")
             },
-            new Role
+            new Role()
             {
-                Id = Guid.Parse("CD7EB224-B08C-46CA-876A-5BB99EF4AD13"),
-                Name = "Administrator",
-                NormalizedName = "ADMINISTRATOR"
+                Id = new RoleId(Guid.Parse("CD7EB224-B08C-46CA-876A-5BB99EF4AD13")),
+                Name = new Name("Administrator"),
+                NormalizedName = NormalizedName.Create("ADMINISTRATOR")
             }
         );
     }

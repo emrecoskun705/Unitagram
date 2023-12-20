@@ -37,8 +37,10 @@ namespace Identity.Infrastructure.Migrations
                     Active = table.Column<bool>(type: "boolean", nullable: false),
                     Username = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
                     NormalizedUsername = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
+                    Password = table.Column<string>(type: "character varying(300)", maxLength: 300, nullable: false),
                     CreatedDateTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    UpdatedDateTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true)
+                    UpdatedDateTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    IdentityId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -82,6 +84,12 @@ namespace Identity.Infrastructure.Migrations
                 name: "IX_Role_NormalizedName",
                 table: "Role",
                 column: "NormalizedName",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_User_IdentityId",
+                table: "User",
+                column: "IdentityId",
                 unique: true);
 
             migrationBuilder.CreateIndex(

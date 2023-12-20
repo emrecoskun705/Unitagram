@@ -22,10 +22,9 @@ namespace Identity.Infrastructure.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Identity.Domain.Role", b =>
+            modelBuilder.Entity("Identity.Domain.Roles.Role", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<string>("Name")
@@ -61,10 +60,9 @@ namespace Identity.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Identity.Domain.User", b =>
+            modelBuilder.Entity("Identity.Domain.Users.User", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<bool>("Active")
@@ -80,6 +78,9 @@ namespace Identity.Infrastructure.Migrations
                     b.Property<bool>("EmailVerified")
                         .HasColumnType("boolean");
 
+                    b.Property<Guid>("IdentityId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(300)
                         .HasColumnType("character varying(300)");
@@ -88,6 +89,11 @@ namespace Identity.Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("character varying(30)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("character varying(300)");
 
                     b.Property<DateTimeOffset?>("UpdatedDateTime")
                         .HasColumnType("timestamp with time zone");
@@ -99,6 +105,10 @@ namespace Identity.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IdentityId")
+                        .IsUnique()
+                        .HasDatabaseName("IX_User_IdentityId");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("IX_User_NormalizedEmail");
 
@@ -109,7 +119,7 @@ namespace Identity.Infrastructure.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("Identity.Domain.UserRole", b =>
+            modelBuilder.Entity("Identity.Domain.Users.UserRole", b =>
                 {
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
@@ -124,15 +134,15 @@ namespace Identity.Infrastructure.Migrations
                     b.ToTable("UserRole");
                 });
 
-            modelBuilder.Entity("Identity.Domain.UserRole", b =>
+            modelBuilder.Entity("Identity.Domain.Users.UserRole", b =>
                 {
-                    b.HasOne("Identity.Domain.Role", "Role")
+                    b.HasOne("Identity.Domain.Roles.Role", "Role")
                         .WithMany("UserRoles")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Identity.Domain.User", "User")
+                    b.HasOne("Identity.Domain.Users.User", "User")
                         .WithMany("UserRoles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -143,12 +153,12 @@ namespace Identity.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Identity.Domain.Role", b =>
+            modelBuilder.Entity("Identity.Domain.Roles.Role", b =>
                 {
                     b.Navigation("UserRoles");
                 });
 
-            modelBuilder.Entity("Identity.Domain.User", b =>
+            modelBuilder.Entity("Identity.Domain.Users.User", b =>
                 {
                     b.Navigation("UserRoles");
                 });

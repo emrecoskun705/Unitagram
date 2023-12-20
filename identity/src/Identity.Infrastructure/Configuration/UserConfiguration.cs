@@ -1,5 +1,4 @@
-﻿using Identity.Domain;
-using Identity.Domain.Users;
+﻿using Identity.Domain.Users;
 using Identity.Domain.Users.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -11,9 +10,10 @@ internal class UserConfiguration : IEntityTypeConfiguration<User>
     public void Configure(EntityTypeBuilder<User> builder)
     {
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).HasConversion(
-            x => x.Value,
-            g => UserId.FromValue(g)
+        builder.Property(x => x.Id)
+            .HasConversion(
+                x => x.Value,
+                g => UserId.FromValue(g)
             );
 
         builder.Property(x => x.Email)
@@ -44,11 +44,17 @@ internal class UserConfiguration : IEntityTypeConfiguration<User>
                 val => NormalizedUsername.Create(val)
             );
         
-        builder.Property(x => x.HashedPassword)
+        builder.Property(x => x.Password)
             .HasMaxLength(300)
             .HasConversion(
                 c => c.Value,
-                val => HashedPassword.FromValue(val)
+                val => Password.FromValue(val)
+            );
+
+        builder.Property(x => x.IdentityId)
+            .HasConversion(
+                c => c.Value,
+                val => IdentityId.FromValue(val)
             );
 
         builder.HasIndex(x => x.NormalizedEmail)
@@ -58,6 +64,8 @@ internal class UserConfiguration : IEntityTypeConfiguration<User>
             .HasDatabaseName("IX_User_NormalizedUsername")
             .IsUnique();
         
-        builder.HasIndex(user => user.IdentityId).IsUnique();
+        builder.HasIndex(user => user.IdentityId)
+            .HasDatabaseName("IX_User_IdentityId")
+            .IsUnique();
     }
 }
