@@ -33,9 +33,9 @@ public sealed class User : BaseEntity<UserId>
         IdentityId = identityId;
     }
     
-    public static User Create(Email email, Username username, Password password, DateTimeOffset createTime, IdentityId identityId)
+    public static User Create(Email email, Username username, Password password, DateTimeOffset createTime)
     {
-        var user = new User(UserId.New(), email, username, password, createTime, identityId);
+        var user = new User(UserId.New(), email, username, password, createTime, IdentityId.New());
         user.AddDomainEvent(new UserCreatedDomainEvent(user.Id));
         return user;
     }

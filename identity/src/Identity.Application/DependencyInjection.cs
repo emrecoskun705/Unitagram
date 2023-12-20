@@ -1,5 +1,4 @@
-﻿using Identity.Application.Users.CreateUser;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace Identity.Application;
 
@@ -7,8 +6,10 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
-
-        services.AddTransient<ICreateUserService, CreateUserService>();
+        services.AddMediatR(m =>
+        {
+            m.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly);
+        });
         
         return services;
     }
