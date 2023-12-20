@@ -3,8 +3,10 @@ using Identity.Application.Abstractions.Data;
 using Identity.Application.Abstractions.Jwt;
 using Identity.Infrastructure.Clock;
 using Identity.Infrastructure.Data;
+using Identity.Infrastructure.Data.Interceptors;
 using Identity.Infrastructure.Jwt;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,8 +24,12 @@ public static class DependencyInjection
         
         services.AddTransient<IDateTimeProvider, DateTimeProvider>();
         
-        services.AddDbContext<ApplicationDbContext>(options =>
+        services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
+        
+        services.AddDbContext<ApplicationDbContext>((sp, options) =>
         {
+            options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
+            
             options.UseNpgsql(connectionString);
         });
         

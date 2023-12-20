@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using Identity.Domain;
 using Identity.Domain.Roles;
 using Identity.Domain.Users;
 using Microsoft.EntityFrameworkCore;
