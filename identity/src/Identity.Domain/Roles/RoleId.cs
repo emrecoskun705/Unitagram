@@ -1,4 +1,6 @@
-﻿namespace Identity.Domain.Roles;
+﻿using Identity.Domain.Common;
+
+namespace Identity.Domain.Roles;
 
 public record RoleId(Guid Value)
 {

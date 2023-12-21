@@ -1,4 +1,4 @@
-using Unitagram.Domain.Common;
+using Identity.Domain.Common;
 
 namespace Identity.Domain.Users.Events;
 

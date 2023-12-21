@@ -1,6 +1,4 @@
-﻿using Unitagram.Domain.Common;
-
-namespace Identity.Domain.Common;
+﻿namespace Identity.Domain.Common;
 
 public interface IEntity
 {

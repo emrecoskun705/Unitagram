@@ -58,7 +58,8 @@ internal class UserConfiguration : IEntityTypeConfiguration<User>
             );
 
         builder.HasIndex(x => x.NormalizedEmail)
-            .HasDatabaseName("IX_User_NormalizedEmail");
+            .HasDatabaseName("IX_User_NormalizedEmail")
+            .IsUnique();
         
         builder.HasIndex(x => x.NormalizedUsername)
             .HasDatabaseName("IX_User_NormalizedUsername")

@@ -1,6 +1,4 @@
-﻿using Unitagram.Domain.Common;
-
-namespace Identity.Domain.Common;
+﻿namespace Identity.Domain.Common;
 
 public abstract class BaseEntity<TEntityId> : IEntity
 {
