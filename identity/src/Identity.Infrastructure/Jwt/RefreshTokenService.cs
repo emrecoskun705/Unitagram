@@ -1,7 +1,6 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Identity.Application.Abstractions.Clock;
 using Identity.Application.Abstractions.Jwt;
 using Identity.Application.Abstractions.Jwt.Models;
 using Microsoft.Extensions.Options;
@@ -10,7 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 namespace Identity.Infrastructure.Jwt;
 
 internal class RefreshTokenService(IOptions<RefreshTokenOptions> refreshTokenOptions,
-    IDateTimeProvider dateTimeProvider) : IRefreshTokenService
+    TimeProvider dateTimeProvider) : IRefreshTokenService
 {
     private readonly RefreshTokenOptions _refreshTokenOptions = refreshTokenOptions.Value;
 

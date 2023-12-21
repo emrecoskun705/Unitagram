@@ -2,7 +2,6 @@ using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Identity.Application.Abstractions.Clock;
 using Identity.Application.Abstractions.Jwt;
 using Identity.Application.Abstractions.Jwt.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -11,7 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Identity.Infrastructure.Jwt;
 
-internal class AccessTokenService(IOptions<AccessTokenOptions> accessTokenOptions, IDateTimeProvider dateTimeProvider) : IAccessTokenService
+internal class AccessTokenService(IOptions<AccessTokenOptions> accessTokenOptions, TimeProvider dateTimeProvider) : IAccessTokenService
 {
     private readonly AccessTokenOptions _accessTokenOptions = accessTokenOptions.Value;
 
@@ -25,7 +24,7 @@ internal class AccessTokenService(IOptions<AccessTokenOptions> accessTokenOption
             new Claim(JwtRegisteredClaimNames.Sid, request.SessionId), // User's session ID
             new Claim(JwtRegisteredClaimNames.Typ, JwtBearerDefaults.AuthenticationScheme),
             new Claim(JwtRegisteredClaimNames.Iat,
-                dateTimeProvider.UtcNow.ToString(CultureInfo.InvariantCulture)), //Issued at (date and time of token generation)
+                dateTimeProvider.GetUtcNow().ToString(CultureInfo.InvariantCulture)), //Issued at (date and time of token generation)
             new Claim(JwtRegisteredClaimNames.Email, request.User.Email?.Value??""),
             new Claim(JwtCustomClaimNames.EmailVerified, request.User.EmailVerified.ToString().ToLower()),
             new Claim(JwtCustomClaimNames.UserEnabled, request.User.Active.ToString().ToLower()),

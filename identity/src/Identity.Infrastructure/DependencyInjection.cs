@@ -1,7 +1,5 @@
-﻿using Identity.Application.Abstractions.Clock;
-using Identity.Application.Abstractions.Data;
+﻿using Identity.Application.Abstractions.Data;
 using Identity.Application.Abstractions.Jwt;
-using Identity.Infrastructure.Clock;
 using Identity.Infrastructure.Data;
 using Identity.Infrastructure.Data.Interceptors;
 using Identity.Infrastructure.Jwt;
@@ -21,8 +19,6 @@ public static class DependencyInjection
 
         services.Configure<AccessTokenOptions>(configuration.GetSection(nameof(AccessTokenOptions)));
         services.Configure<RefreshTokenOptions>(configuration.GetSection(nameof(RefreshTokenOptions)));
-        
-        services.AddTransient<IDateTimeProvider, DateTimeProvider>();
         
         services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
         
