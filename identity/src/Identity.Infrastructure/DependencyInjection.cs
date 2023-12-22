@@ -1,9 +1,11 @@
 ﻿using Identity.Application.Abstractions.Data;
 using Identity.Application.Abstractions.Jwt;
 using Identity.Domain.Common;
+using Identity.Domain.Users;
 using Identity.Infrastructure.Data;
 using Identity.Infrastructure.Data.Interceptors;
 using Identity.Infrastructure.Jwt;
+using Identity.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
@@ -18,12 +20,12 @@ public static class DependencyInjection
     {
         var connectionString = configuration.GetConnectionString("Default") ?? throw new ArgumentNullException($"connectionString");
 
-        services.Configure<AccessTokenOptions>(configuration.GetSection(nameof(AccessTokenOptions)));
-        services.Configure<RefreshTokenOptions>(configuration.GetSection(nameof(RefreshTokenOptions)));
+        _ = services.Configure<AccessTokenOptions>(configuration.GetSection(nameof(AccessTokenOptions)));
+        _ = services.Configure<RefreshTokenOptions>(configuration.GetSection(nameof(RefreshTokenOptions)));
         
-        services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
+        _ = services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
         
-        services.AddDbContext<ApplicationDbContext>((sp, options) =>
+        _ = services.AddDbContext<ApplicationDbContext>((sp, options) =>
         {
             options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
             
@@ -31,12 +33,16 @@ public static class DependencyInjection
         });
         
         #region Dapper
-        services.AddSingleton<ISqlConnectionFactory>(_ => new SqlConnectionFactory(connectionString));
+        _ = services.AddSingleton<ISqlConnectionFactory>(_ => new SqlConnectionFactory(connectionString));
         #endregion
         
-        services.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<ApplicationDbContext>());
+        _ = services.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<ApplicationDbContext>());
 
-        services.AddTransient<IAccessTokenService, AccessTokenService>();
+        _ = services.AddScoped<IUserRepository, UserRepository>();
+        
+        _ = services.AddTransient<IAccessTokenService, AccessTokenService>();
+        
+        _ = services.AddSingleton(TimeProvider.System);
 
         return services;
     }

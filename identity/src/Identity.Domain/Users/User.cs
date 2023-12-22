@@ -6,7 +6,6 @@ namespace Identity.Domain.Users;
 
 public sealed class User : BaseEntity<UserId>
 {
-    public UserId Id { get; set; }
     public Email? Email { get; set; }
     public NormalizedEmail? NormalizedEmail { get; set; }
     public bool EmailVerified { get; set; }
