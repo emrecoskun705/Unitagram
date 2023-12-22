@@ -1,4 +1,5 @@
-﻿using Identity.Domain.Users;
+﻿using Identity.Domain.Roles;
+using Identity.Domain.Users;
 using Identity.Domain.Users.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,7 +10,12 @@ internal sealed class UserRepository : Repository<User, UserId>, IUserRepository
     public UserRepository(ApplicationDbContext dbContext) : base(dbContext)
     {
     }
-    
+
+    public async Task AddRoleAsync(UserRole entity)
+    {
+        await _db.AddAsync<UserRole>(entity);
+    }
+
     public async Task<User?> GetByUsernameAsync(Username username, CancellationToken ct = default)
     {
         return await _db.Set<User>()

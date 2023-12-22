@@ -13,7 +13,6 @@ public static class UsersEndpoints
             .WithTags("users");
 
         _ = root.MapPost("/", CreateUser)
-            .Produces<Guid>()
             .ProducesProblem(StatusCodes.Status400BadRequest);
 
         return app;
@@ -21,18 +20,11 @@ public static class UsersEndpoints
     
     private static async Task<IResult> CreateUser([FromBody]CreateUserRequest request, IMediator mediator)
     {
-        try
-        {
-            var result = await mediator.Send(new CreateUserCommand(request.Email, request.Username, request.Password));
+        var result = await mediator.Send(new CreateUserCommand(request.Email, request.Username, request.Password));
 
-            if (result.IsSuccess)
-                return Results.Ok(result);
-            
-            return Results.BadRequest(result.Error);
-        }
-        catch (Exception ex)
-        {
-            return Results.Problem(ex.StackTrace, ex.Message, StatusCodes.Status500InternalServerError);
-        }
+        if (result.IsSuccess)
+            return Results.Created();
+        
+        return Results.BadRequest(result.Error);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Identity.Application.Abstractions.Data;
 using Identity.Application.Abstractions.Jwt;
 using Identity.Domain.Common;
+using Identity.Domain.Roles;
 using Identity.Domain.Users;
 using Identity.Infrastructure.Data;
 using Identity.Infrastructure.Data.Interceptors;
@@ -39,6 +40,7 @@ public static class DependencyInjection
         _ = services.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<ApplicationDbContext>());
 
         _ = services.AddScoped<IUserRepository, UserRepository>();
+        _ = services.AddScoped<IRoleRepository, RoleRepository>();
         
         _ = services.AddTransient<IAccessTokenService, AccessTokenService>();
         

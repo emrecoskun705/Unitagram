@@ -7,6 +7,4 @@ var builder = WebApplication
 var app = builder.Build()
     .ConfigureApplication();
 
-app.MapGet("/ex", context => throw new ArgumentNullException("ersdfsd"));
-
 app.Run();

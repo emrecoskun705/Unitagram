@@ -34,18 +34,14 @@ internal class RoleConfiguration : IEntityTypeConfiguration<Role>
             .IsUnique();
 
         builder.HasData(
-            new Role()
-            {
-                Id = new RoleId(Guid.Parse("8426249A-A917-45E8-B8BB-43A551A884ED")),
-                Name = new Name("DefaultUser"),
-                NormalizedName = NormalizedName.Create("DEFAULTUSER")
-            },
-            new Role()
-            {
-                Id = new RoleId(Guid.Parse("CD7EB224-B08C-46CA-876A-5BB99EF4AD13")),
-                Name = new Name("Administrator"),
-                NormalizedName = NormalizedName.Create("ADMINISTRATOR")
-            }
+            Role.Create(
+                new RoleId(Guid.Parse("8426249A-A917-45E8-B8BB-43A551A884ED")), 
+                new Name(Role.DefaultUser)
+                ),
+            Role.Create(
+                new RoleId(Guid.Parse("35C029CB-F156-4787-9D24-D63951956E3E")), 
+                new Name(Role.Administrator)
+            )
         );
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Identity.Domain.Roles.ValueObjects;
+﻿using System.Globalization;
+
+namespace Identity.Domain.Roles.ValueObjects;
 
 public sealed record NormalizedName
 {
@@ -8,6 +10,6 @@ public sealed record NormalizedName
 
     public static NormalizedName Create(string name)
     {
-        return new NormalizedName(name.ToUpper());
+        return new NormalizedName(name.ToUpper(CultureInfo.InvariantCulture));
     }
 }
