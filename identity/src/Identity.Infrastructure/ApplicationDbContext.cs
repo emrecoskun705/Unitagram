@@ -1,11 +1,12 @@
 ﻿using System.Reflection;
+using Identity.Domain.Common;
 using Identity.Domain.Roles;
 using Identity.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 
 namespace Identity.Infrastructure;
 
-public class ApplicationDbContext : DbContext
+public class ApplicationDbContext : DbContext, IUnitOfWork
 {
     public ApplicationDbContext()
     {

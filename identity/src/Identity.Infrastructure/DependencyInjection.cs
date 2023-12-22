@@ -1,5 +1,6 @@
 ﻿using Identity.Application.Abstractions.Data;
 using Identity.Application.Abstractions.Jwt;
+using Identity.Domain.Common;
 using Identity.Infrastructure.Data;
 using Identity.Infrastructure.Data.Interceptors;
 using Identity.Infrastructure.Jwt;
@@ -32,6 +33,8 @@ public static class DependencyInjection
         #region Dapper
         services.AddSingleton<ISqlConnectionFactory>(_ => new SqlConnectionFactory(connectionString));
         #endregion
+        
+        services.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<ApplicationDbContext>());
 
         services.AddTransient<IAccessTokenService, AccessTokenService>();
 

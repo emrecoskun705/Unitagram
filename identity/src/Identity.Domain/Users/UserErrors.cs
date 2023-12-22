@@ -1,6 +1,6 @@
 ﻿using Identity.Domain.Shared;
 
-namespace Identity.Domain;
+namespace Identity.Domain.Users;
 
 public static class UserErrors
 {
