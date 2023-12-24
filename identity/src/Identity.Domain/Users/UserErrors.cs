@@ -19,4 +19,8 @@ public static class UserErrors
     public static Error EmailExists = new(
         "User.EmailExists", 
         "Email exists");
+    
+    public static Error NotActive = new(
+        "User.NotActive", 
+        "User is not an active user");
 }

@@ -1,5 +1,3 @@
-using Identity.Domain.Users;
-
 namespace Identity.Application.Abstractions.Jwt.Models;
 
-public record AccessTokenRequest(User User, string SessionId);
+public record AccessTokenRequest(string Username, string Email, bool EmailVerified, bool Active, string SessionId, List<string> UserRoles);

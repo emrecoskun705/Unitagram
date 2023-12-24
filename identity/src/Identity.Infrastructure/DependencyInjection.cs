@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Logging;
 
 namespace Identity.Infrastructure;
 
@@ -43,8 +44,10 @@ public static class DependencyInjection
         _ = services.AddScoped<IRoleRepository, RoleRepository>();
         
         _ = services.AddTransient<IAccessTokenService, AccessTokenService>();
+        _ = services.AddTransient<IRefreshTokenService, RefreshTokenService>();
         
         _ = services.AddSingleton(TimeProvider.System);
+        
 
         return services;
     }

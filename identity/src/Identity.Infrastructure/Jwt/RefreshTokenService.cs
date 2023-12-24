@@ -19,7 +19,7 @@ internal class RefreshTokenService(IOptions<RefreshTokenOptions> refreshTokenOpt
 
         var claims = new[]
         {
-            new Claim(JwtRegisteredClaimNames.Sub, request.User.Username.Value), //Subject (user id)
+            new Claim(JwtRegisteredClaimNames.Sub, request.IdentityId), //Subject (user id)
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()), //JWT unique ID
             new Claim(JwtRegisteredClaimNames.Sid, request.SessionId), // User's session ID
             new Claim(JwtRegisteredClaimNames.Typ, "Refresh"),
@@ -27,7 +27,7 @@ internal class RefreshTokenService(IOptions<RefreshTokenOptions> refreshTokenOpt
 
         var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_refreshTokenOptions.Key));
 
-        var signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.RsaSha256);
+        var signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
 
         var tokenGenerator = new JwtSecurityToken(
             _refreshTokenOptions.Issuer,
