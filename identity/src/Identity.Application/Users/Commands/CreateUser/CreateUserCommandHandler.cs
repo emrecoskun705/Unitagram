@@ -23,11 +23,13 @@ public class CreateUserCommandHandler(
 
         if (getDefaultRole == null)
             throw new NullReferenceException("Default role cannot be null");
+
+        var hashPassword = PasswordManager.HashPassword(command.Password);
         
         var user = User.Create(
             new Email(command.Email),
             new Username(command.Username),
-            Password.Hash(command.Password),
+            Password.FromValue(hashPassword),
             dateTimeProvider.GetUtcNow());
 
         var userRole = new UserRole()

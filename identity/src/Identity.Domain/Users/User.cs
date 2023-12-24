@@ -25,7 +25,7 @@ public sealed class User : BaseEntity<UserId>
         NormalizedEmail = NormalizedEmail.Create(email.Value);
         Username = username;
         NormalizedUsername = NormalizedUsername.Create(username.Value);
-        Password = Password.Hash(password.Value);
+        Password = password;
         EmailVerified = false;
         Active = true;
         CreatedDateTime = createdDateTime;

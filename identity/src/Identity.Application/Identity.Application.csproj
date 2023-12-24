@@ -26,4 +26,8 @@
       <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Users\Commands\AuthenticateUser\" />
+    </ItemGroup>
+
 </Project>
