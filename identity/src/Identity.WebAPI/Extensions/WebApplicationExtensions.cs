@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Identity.WebAPI.Endpoints.Users;
+using Identity.WebAPI.Middlewares;
 
 namespace Identity.WebAPI.Extensions;
 
@@ -8,10 +9,12 @@ public static class WebApplicationExtensions
 {
     public static WebApplication ConfigureApplication(this WebApplication app)
     {
-        _ = app.UseExceptionHandler(exceptionHandlerApp
+        app.UseMiddleware<ClientValidationMiddleware>();
+        
+        app.UseExceptionHandler(exceptionHandlerApp
             => exceptionHandlerApp.Run(async context => await Results.Problem().ExecuteAsync(context)));
         
-        _ = app.MapUsersEndpoints();
+        app.MapUsersEndpoints();
 
         return app;
     }

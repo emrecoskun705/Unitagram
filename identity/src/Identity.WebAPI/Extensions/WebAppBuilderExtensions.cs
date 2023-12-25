@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Identity.Application;
 using Identity.Infrastructure;
+using Identity.WebAPI.Configurations;
 
 namespace Identity.WebAPI.Extensions;
 
@@ -15,6 +16,8 @@ public static class WebAppBuilderExtensions
         builder.Services.AddInfrastructureServices(builder.Configuration);
 
         builder.Services.AddMemoryCache();
+        
+        builder.Services.Configure<ClientOptions>(builder.Configuration.GetSection(nameof(ClientOptions)));
         
         #endregion Project Dependencies
         
