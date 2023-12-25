@@ -22,12 +22,12 @@ public static class DependencyInjection
     {
         var connectionString = configuration.GetConnectionString("Default") ?? throw new ArgumentNullException($"connectionString");
 
-        _ = services.Configure<AccessTokenOptions>(configuration.GetSection(nameof(AccessTokenOptions)));
-        _ = services.Configure<RefreshTokenOptions>(configuration.GetSection(nameof(RefreshTokenOptions)));
+        services.Configure<AccessTokenOptions>(configuration.GetSection(nameof(AccessTokenOptions)));
+        services.Configure<RefreshTokenOptions>(configuration.GetSection(nameof(RefreshTokenOptions)));
         
-        _ = services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
+        services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
         
-        _ = services.AddDbContext<ApplicationDbContext>((sp, options) =>
+        services.AddDbContext<ApplicationDbContext>((sp, options) =>
         {
             options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
             
@@ -35,18 +35,18 @@ public static class DependencyInjection
         });
         
         #region Dapper
-        _ = services.AddSingleton<ISqlConnectionFactory>(_ => new SqlConnectionFactory(connectionString));
+        services.AddSingleton<ISqlConnectionFactory>(_ => new SqlConnectionFactory(connectionString));
         #endregion
         
-        _ = services.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<ApplicationDbContext>());
+        services.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<ApplicationDbContext>());
 
-        _ = services.AddScoped<IUserRepository, UserRepository>();
-        _ = services.AddScoped<IRoleRepository, RoleRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IRoleRepository, RoleRepository>();
         
-        _ = services.AddTransient<IAccessTokenService, AccessTokenService>();
-        _ = services.AddTransient<IRefreshTokenService, RefreshTokenService>();
+        services.AddTransient<IAccessTokenService, AccessTokenService>();
+        services.AddTransient<IRefreshTokenService, RefreshTokenService>();
         
-        _ = services.AddSingleton(TimeProvider.System);
+        services.AddSingleton(TimeProvider.System);
         
 
         return services;
