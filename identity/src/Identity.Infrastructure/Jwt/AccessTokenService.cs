@@ -22,7 +22,7 @@ internal class AccessTokenService(IOptions<AccessTokenOptions> accessTokenOption
             new Claim(JwtRegisteredClaimNames.Sub, request.Username), //Subject (user id)
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()), //JWT unique ID
             new Claim(JwtRegisteredClaimNames.Sid, request.SessionId), // User's session ID
-            // new Claim(JwtRegisteredClaimNames.Typ, JwtBearerDefaults.AuthenticationScheme),
+            new Claim(JwtRegisteredClaimNames.Typ, JwtBearerDefaults.AuthenticationScheme),
             new Claim(JwtRegisteredClaimNames.Iat,
                 dateTimeProvider.GetUtcNow().ToString(CultureInfo.InvariantCulture)), //Issued at (date and time of token generation)
             new Claim(JwtRegisteredClaimNames.Email, request.Email),
