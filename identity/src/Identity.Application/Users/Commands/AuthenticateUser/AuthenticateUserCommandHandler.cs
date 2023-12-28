@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using System.Data;
+using Dapper;
 using Identity.Application.Abstractions.Data;
 using Identity.Application.Abstractions.Jwt;
 using Identity.Application.Abstractions.Jwt.Models;
@@ -20,27 +21,9 @@ public class AuthenticateUserCommandHandler(
         var normalizedUsername = NormalizedUsername.Create(request.Username).Value; 
         
         using var connection = sqlConnectionFactory.CreateConnection();
+
+        var user = await GetUser(connection, normalizedUsername);
         
-        const string sql = $"""
-                            SELECT 
-                                "Id" as "{nameof(UserDTO.Id)}",
-                                "IdentityId" as "{nameof(UserDTO.IdentityId)}",
-                                "Email" as "{nameof(UserDTO.Email)}",
-                                "Active" as "{nameof(UserDTO.Active)}",
-                                "EmailVerified" as "{nameof(UserDTO.EmailVerified)}",
-                                "Username" as "{nameof(UserDTO.Username)}",
-                                "Password" as "{nameof(UserDTO.Password)}"
-                            FROM "User" u
-                            WHERE u."NormalizedUsername" = @NormalizedUsername
-                            """;
-
-        var user = await connection.QuerySingleOrDefaultAsync<UserDTO>(
-            sql,
-            new
-            {
-                NormalizedUsername = normalizedUsername  
-            });
-
         if (user == null)
         {
             return UserErrors.InvalidCredentials;
@@ -56,21 +39,7 @@ public class AuthenticateUserCommandHandler(
             return UserErrors.InvalidCredentials;
         }
         
-        var userRoleSql = $"""
-                           select "Name"
-                           FROM "UserRole" ur
-                           INNER JOIN "Role" r ON ur."RoleId" = r."Id"
-                           WHERE ur."UserId" = @UserId
-                           """;
-        
-        var userRoles = await connection.QuerySingleOrDefaultAsync<List<string>>(
-            userRoleSql,
-            new
-            {
-                UserId = user.Id  
-            });
-
-        user.Roles = userRoles ?? new List<string>();
+        user.Roles = await GetUserRoles(connection, user);
 
         var session = Guid.NewGuid().ToString();
         
@@ -91,5 +60,49 @@ public class AuthenticateUserCommandHandler(
             );
         
         return new AuthenticationDto(accessToken.Token, refreshToken.Token);
+    }
+
+    private async Task<List<string>> GetUserRoles(IDbConnection connection, UserDTO user)
+    {
+        var userRoleSql = $"""
+                           select "Name"
+                           FROM "UserRole" ur
+                           INNER JOIN "Role" r ON ur."RoleId" = r."Id"
+                           WHERE ur."UserId" = @UserId
+                           """;
+        
+        var userRoles = await connection.QuerySingleOrDefaultAsync<List<string>>(
+            userRoleSql,
+            new
+            {
+                UserId = user.Id  
+            });
+
+        return userRoles ?? new List<string>();
+    }
+
+    private async Task<UserDTO?> GetUser(IDbConnection connection, string normalizedUsername)
+    {
+        const string sql = $"""
+                            SELECT
+                                "Id" as "{nameof(UserDTO.Id)}",
+                                "IdentityId" as "{nameof(UserDTO.IdentityId)}",
+                                "Email" as "{nameof(UserDTO.Email)}",
+                                "Active" as "{nameof(UserDTO.Active)}",
+                                "EmailVerified" as "{nameof(UserDTO.EmailVerified)}",
+                                "Username" as "{nameof(UserDTO.Username)}",
+                                "Password" as "{nameof(UserDTO.Password)}"
+                            FROM "User" u
+                            WHERE u."NormalizedUsername" = @NormalizedUsername
+                            """;
+
+        var user = await connection.QuerySingleOrDefaultAsync<UserDTO>(
+            sql,
+            new
+            {
+                NormalizedUsername = normalizedUsername  
+            });
+
+        return user;
     }
 }
